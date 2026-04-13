@@ -67,7 +67,7 @@ export default function ContactPage() {
                 setStatus("idle");
             }
 
-        } catch (err) {
+        } catch {
             setStatus("idle");
         }
 

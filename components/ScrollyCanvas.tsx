@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
-import { useScroll, useTransform, useMotionValueEvent, motion } from "framer-motion";
+import React, { useEffect, useRef, useState, useCallback } from "react";
+import { useScroll, useTransform, useMotionValueEvent, motion, MotionValue, AnimatePresence } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
@@ -21,11 +21,6 @@ export default function ScrollyCanvas({ frameCount, children }: ScrollyCanvasPro
   const backgroundWrapperRef = useRef<HTMLDivElement>(null);
   const [images, setImages] = useState<HTMLImageElement[]>([]);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [hasMounted, setHasMounted] = useState(false);
-
-  useEffect(() => {
-    setHasMounted(true);
-  }, []);
 
   // Animation values for frames (FM is great for this)
   const { scrollYProgress } = useScroll({
@@ -37,8 +32,6 @@ export default function ScrollyCanvas({ frameCount, children }: ScrollyCanvasPro
 
   // Preload images
   useEffect(() => {
-    if (!hasMounted) return;
-
     const preloadImages = async () => {
       console.log(`Starting preloading for ${frameCount} frames...`);
       const loadedImages: HTMLImageElement[] = [];
@@ -57,7 +50,7 @@ export default function ScrollyCanvas({ frameCount, children }: ScrollyCanvasPro
           const img = new Image();
           const frameNum = i.toString().padStart(2, "0");
           // Use absolute path with origin to be 100% explicit
-          const fullPath = `${window.location.origin}/sequence/frame_${frameNum}_delay-0.1s.png`;
+          const fullPath = `${window.location.origin}/sequence/frame_${frameNum}_delay-0.1s.webp`;
           img.src = fullPath;
 
           const promise = new Promise<void>((resolve) => {
@@ -105,27 +98,10 @@ export default function ScrollyCanvas({ frameCount, children }: ScrollyCanvasPro
     }, 5000);
 
     return () => clearTimeout(forceTimer);
-  }, [frameCount, hasMounted]);
-
-  // GSAP for cinematic zoom and parallax
-  useGSAP(() => {
-    if (!backgroundWrapperRef.current || !containerRef.current) return;
-
-    gsap.to(backgroundWrapperRef.current, {
-      scale: 1.1,
-      y: "5%",
-      ease: "none",
-      scrollTrigger: {
-        trigger: containerRef.current,
-        start: "top top",
-        end: "bottom bottom",
-        scrub: true,
-      },
-    });
-  }, { scope: containerRef });
+  }, [frameCount]);
 
   // Helper render function
-  const render = (index: number) => {
+  const render = useCallback((index: number) => {
     if (!canvasRef.current || images.length === 0) return;
     const canvas = canvasRef.current;
     const context = canvas.getContext("2d");
@@ -146,7 +122,24 @@ export default function ScrollyCanvas({ frameCount, children }: ScrollyCanvasPro
 
     context.clearRect(0, 0, canvasWidth, canvasHeight);
     context.drawImage(img, x, y, imgWidth * scale, imgHeight * scale);
-  };
+  }, [images]);
+
+  // GSAP for cinematic zoom and parallax
+  useGSAP(() => {
+    if (!backgroundWrapperRef.current || !containerRef.current) return;
+
+    gsap.to(backgroundWrapperRef.current, {
+      scale: 1.1,
+      y: "5%",
+      ease: "none",
+      scrollTrigger: {
+        trigger: containerRef.current,
+        start: "top top",
+        end: "bottom bottom",
+        scrub: true,
+      },
+    });
+  }, { scope: containerRef });
 
   useMotionValueEvent(frameIndex, "change", (latest: number) => {
     render(latest);
@@ -166,51 +159,50 @@ export default function ScrollyCanvas({ frameCount, children }: ScrollyCanvasPro
     if (isLoaded) render(frameIndex.get());
 
     return () => window.removeEventListener("resize", handleResize);
-  }, [isLoaded, images]);
+  }, [isLoaded, render, frameIndex]);
 
   const opacity = useTransform(scrollYProgress, [0, 0.95, 1], [1, 1, 0]);
-  const pointerEvents = useTransform(scrollYProgress, (v: number) => v < 1 ? "auto" : "none") as any;
+  const pointerEvents = useTransform<number, string>(scrollYProgress, (v: number) => v < 1 ? "auto" : "none") as unknown as MotionValue<string>;
 
   return (
     <div ref={containerRef} className="relative w-full bg-black">
-      {hasMounted ? (
-        <>
-          <motion.div
-            ref={backgroundWrapperRef}
-            style={{ opacity, pointerEvents }}
-            className="sticky top-0 h-screen w-full overflow-hidden pointer-events-none -mb-[100vh]"
-          >
-            {/* Cinematic Noise Layer */}
-            <div className="absolute inset-0 z-10 opacity-[0.03] pointer-events-none mix-blend-screen bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
+      <motion.div
+        ref={backgroundWrapperRef}
+        style={{ opacity, pointerEvents }}
+        className="sticky top-0 h-screen w-full overflow-hidden pointer-events-none -mb-[100vh]"
+      >
+        {/* Cinematic Noise Layer */}
+        <div className="absolute inset-0 z-10 opacity-[0.03] pointer-events-none mix-blend-screen bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
 
-            {/* Dark Cinematic Overlay */}
-            <div className="absolute inset-0 z-10 bg-black/40 pointer-events-none" />
+        {/* Dark Cinematic Overlay */}
+        <div className="absolute inset-0 z-10 bg-black/40 pointer-events-none" />
 
-            {!isLoaded && (
-              <div className="absolute inset-0 flex items-center justify-center bg-black z-50">
-                <div className="text-white text-xl font-light tracking-[0.5em] animate-pulse">
-                  LOADING EXPERIENCE...
-                </div>
+        {/* Non-blocking loading state: only covers the canvas, not the children */}
+        <AnimatePresence>
+          {!isLoaded && (
+            <motion.div
+              initial={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 1 }}
+              className="absolute inset-0 bg-black z-10 flex items-center justify-center"
+            >
+              <div className="text-white/20 text-[10px] tracking-[1em] uppercase">
+                Initializing...
               </div>
-            )}
-            <canvas
-              ref={canvasRef}
-              className="absolute inset-0 h-full w-full object-cover"
-            />
-          </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
-          {/* Overlay children in the relative flow (scrolling on top of sticky canvas) */}
-          <div className="relative z-20 w-full">
-            {children}
-          </div>
-        </>
-      ) : (
-        <div className="h-screen w-full bg-black flex items-center justify-center">
-          <div className="text-white text-xl font-light tracking-[0.5em] animate-pulse">
-            INITIALIZING...
-          </div>
-        </div>
-      )}
+        <canvas
+          ref={canvasRef}
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+      </motion.div>
+
+      {/* Overlay children in the relative flow (scrolling on top of sticky canvas) */}
+      <div className="relative z-20 w-full min-h-screen">
+        {children}
+      </div>
     </div>
   );
 }

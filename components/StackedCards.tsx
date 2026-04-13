@@ -6,6 +6,8 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "@studio-freight/lenis";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
+
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -44,7 +46,7 @@ export default function StackedCards({ cases }: { cases: Case[] }) {
     const rafRef = useRef<number>(0);
     const mouse = useRef({ x: 0, y: 0, cx: 0, cy: 0 });
     const [isMobileView, setIsMobileView] = useState(false);
-    const lenisRef = useRef<any>(null);
+    const lenisRef = useRef<Lenis | null>(null);
 
     useEffect(() => {
         const handleResize = () => setIsMobileView(window.innerWidth <= 1024);
@@ -58,18 +60,15 @@ export default function StackedCards({ cases }: { cases: Case[] }) {
     const DIAG_Y = -75;
     const DIAG_Z = -50;
 
-    // Auto-hide hint after 4s, or on first hover
+    // Auto-hide hint after 4s
     useEffect(() => {
-        const timer = setTimeout(() => setHintVisible(false), 4000);
+        const timer = setTimeout(() => {
+            if (!hintDismissed) setHintVisible(false);
+        }, 4000);
         return () => clearTimeout(timer);
-    }, []);
+    }, [hintDismissed]);
 
-    useEffect(() => {
-        if (hoveredIdx >= 0 && !hintDismissed) {
-            setHintVisible(false);
-            setHintDismissed(true);
-        }
-    }, [hoveredIdx, hintDismissed]);
+
 
     useEffect(() => {
         if (expandedIdx !== null) {
@@ -97,10 +96,10 @@ export default function StackedCards({ cases }: { cases: Case[] }) {
 
         mm.add({
             isDesktop: "(min-width: 1025px)",
-            isMobile: "(max-width: 1024px)",
-            h720: "(width: 1280px) and (height: 720px)"
+            isMobile: "(max-width: 1024px)"
         }, (context) => {
-            const { isMobile, h720 } = context.conditions as any;
+            const conditions = context.conditions as { isMobile: boolean; isDesktop: boolean };
+            const isMobile = conditions.isMobile;
             const activeDiagX = isMobile ? 5 : DIAG_X;
             const activeDiagY = isMobile ? -60 : DIAG_Y;
             const activeDiagZ = isMobile ? -40 : DIAG_Z;
@@ -347,24 +346,29 @@ export default function StackedCards({ cases }: { cases: Case[] }) {
                                             transition: "border-color 0.4s",
                                             cursor: "none",
                                         }}
-                                        onMouseEnter={() => setHoveredIdx(i)}
+                                        onMouseEnter={() => {
+                                            setHoveredIdx(i);
+                                            if (!hintDismissed) {
+                                                setHintVisible(false);
+                                                setHintDismissed(true);
+                                            }
+                                        }}
                                         onMouseMove={e => handleCardMouseMove(e, i)}
                                         onMouseLeave={() => handleCardMouseLeave(i)}
                                         onClick={() => setExpandedIdx(i)}
                                     >
                                         {/* Card base with Image */}
-                                        <div className="absolute inset-0 bg-[#0a0a0a]">
-                                            {c.image ? (
-                                                <img
-                                                    src={c.image}
-                                                    alt={c.client}
-                                                    className="w-full h-full object-cover"
-                                                    loading="lazy"
-                                                />
-                                            ) : (
-                                                <div className="w-full h-full bg-[#f5f5f4]" />
-                                            )}
-                                        </div>
+                                        {c.image ? (
+                                            <Image
+                                                src={c.image}
+                                                alt={c.client}
+                                                fill
+                                                className="object-cover"
+                                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                            />
+                                        ) : (
+                                            <div className="w-full h-full bg-[#f5f5f4]" />
+                                        )}
 
                                         {/* SVG texture overlay (reduced opacity for image context) */}
                                         <svg
@@ -610,7 +614,7 @@ export default function StackedCards({ cases }: { cases: Case[] }) {
                                             fontStyle: "italic", fontWeight: 400,
                                             color: "rgba(0,0,0,0.62)", lineHeight: 1.7,
                                         }} className="font-sans">
-                                            "{data.story}"
+                                            &quot;{data.story}&quot;
                                         </p>
                                         <div className="flex gap-2 flex-wrap mt-7">
                                             {data.process.map((p, pi) => (

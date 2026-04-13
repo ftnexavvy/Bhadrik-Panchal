@@ -2,7 +2,6 @@
 import React, { useState } from "react";
 import SectionWrapper from "@/components/SectionWrapper";
 import { motion, AnimatePresence } from "framer-motion";
-import Link from "next/link";
 import { Plus, Minus } from "lucide-react";
 
 const programs = [
@@ -297,7 +296,7 @@ export default function ServicesPage() {
                         mb-10 sm:mb-12 md:mb-16 font-light uppercase tracking-[0.25em] sm:tracking-[0.3em]
                         max-w-xs sm:max-w-lg md:max-w-2xl mx-auto
                     ">
-                        You don't need more effort. You need clarity to see the right move.
+                        You don&apos;t need more effort. You need clarity to see the right move.
                     </p>
 
                     <a

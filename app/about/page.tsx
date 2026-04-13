@@ -51,7 +51,7 @@ export default function AboutPage() {
                     <FloatingElement duration={8} yRange={[0, -20]} xRange={[0, 10]}>
                         <div className="relative aspect-[4/5] md:aspect-[5/6] rounded-2xl overflow-hidden group">
                             <Image
-                                src="/assets/images/profile1.jpeg"
+                                src="/assets/images/profile1.webp"
                                 alt="Bhadrik Panchal"
                                 fill
                                 className="object-cover transition-transform duration-[2s] group-hover:scale-[1.03]"
@@ -63,7 +63,7 @@ export default function AboutPage() {
           absolute inset-0 flex items-center justify-center z-10 pointer-events-none
           text-white/[0.04] font-black tracking-tighter uppercase select-none
           text-[5rem] md:text-[6rem] xl:text-[8rem] 2xl:text-[10rem] 3xl:text-[12rem]
-        ">
+         ">
                                 BHADRIK
                             </div>
                             <div className="absolute bottom-8 left-8 xl:bottom-10 xl:left-10 2xl:bottom-14 2xl:left-14 z-20">

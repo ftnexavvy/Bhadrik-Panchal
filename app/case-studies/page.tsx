@@ -16,7 +16,7 @@ const cases = [
         timeline: "8 Months",
         story: "Shifted from manual operations and reactive decisions to a clear, system-driven business model. Built a scalable structure that reduced founder dependency and unlocked consistent revenue growth.",
         process: ["Clarity", "Systems", "Execution"],
-        image: "/images/cases/arjun.png",
+        image: "/images/cases/arjun.webp",
     },
     {
         client: "Meera Iyer",
@@ -27,7 +27,7 @@ const cases = [
         timeline: "12 Months",
         story: "Evolved from a small local brand into a structured, high-authority business with clear positioning, strong digital presence, and predictable growth systems that compound over time.",
         process: ["Positioning", "Brand", "Growth"],
-        image: "/images/cases/meera.png",
+        image: "/images/cases/meera.webp",
     },
     {
         client: "Sameer Shah",
@@ -38,7 +38,7 @@ const cases = [
         timeline: "90 Days",
         story: "Moved from daily operational chaos to clear thinking and strategic leadership. Built decision-making clarity and freed up time to focus on scaling rather than surviving.",
         process: ["Mindset", "Clarity", "Leadership"],
-        image: "/images/cases/sameer.png",
+        image: "/images/cases/sameer.webp",
     },
     {
         client: "Riya Kapoor",
@@ -49,7 +49,7 @@ const cases = [
         timeline: "6 Months",
         story: "Replaced a scattered feature-pitch sales process with a tight outcome-led go-to-market motion. Churn dropped, NPS climbed, and monthly recurring revenue more than doubled.",
         process: ["GTM", "Positioning", "Retention"],
-        image: "/images/cases/riya.png",
+        image: "/images/cases/riya.webp",
     },
     {
         client: "Vikram Nair",
@@ -60,7 +60,7 @@ const cases = [
         timeline: "5 Months",
         story: "Moved away from unpredictable word-of-mouth into a repeatable demand-generation engine. Built authority through content, tightened the sales process, and filled a ₹40Cr forward pipeline.",
         process: ["Authority", "Demand-Gen", "Closing"],
-        image: "/images/cases/vikram.png",
+        image: "/images/cases/vikram.webp",
     },
     {
         client: "Pooja Desai",
@@ -71,7 +71,7 @@ const cases = [
         timeline: "9 Months",
         story: "Redesigned the post-purchase journey from a transactional dead end into a loyalty ecosystem. Subscription revenue now accounts for 60% of total sales, with community at the core.",
         process: ["Retention", "Community", "LTV"],
-        image: "/images/cases/pooja.png",
+        image: "/images/cases/pooja.webp",
     },
 ];
 

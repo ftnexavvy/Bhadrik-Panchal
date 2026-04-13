@@ -2,12 +2,20 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import ScrollyCanvas from "../components/ScrollyCanvas";
+import dynamic from "next/dynamic";
+import Script from "next/script";
+
+// Defer heavy components to reduce initial JS payload
+const ScrollyCanvas = dynamic(() => import("../components/ScrollyCanvas"), {
+  ssr: true,
+  loading: () => <div className="min-h-screen bg-black" />
+});
+const TextReveal = dynamic(() => import("../components/TextReveal"), { ssr: false });
+const Footer = dynamic(() => import("@/components/Footer"), { ssr: false });
+
 import FloatingElement from "../components/FloatingElement";
-import TextReveal from "../components/TextReveal";
 import Magnet from "../components/Magnet";
 import Link from "next/link";
-import Footer from "@/components/Footer";
 import {
   Zap,
   ChevronRight,
@@ -127,6 +135,11 @@ export default function Home() {
 
   return (
     <main className="bg-black text-white selection:bg-white selection:text-black">
+      {/* Lazy load Cal.com embed script */}
+      <Script
+        src="https://asset.cal.com/embed/embed.js"
+        strategy="lazyOnload"
+      />
 
       <ScrollyCanvas frameCount={80}>
         {/* Hero Content Section */}

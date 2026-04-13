@@ -147,7 +147,7 @@ export default function Footer() {
                             <h4 className="text-[10px] uppercase tracking-[0.4em] text-white/40 font-black">Hold</h4>
                             <div className="space-y-4 text-xs font-bold uppercase tracking-widest text-gray-500">
                                 <a href="mailto:hello@bhadrikpanchal.com" className="block hover:text-white transition lowercase">hello@bhadrikpanchal.com</a>
-                                <p>Ahmedabad, GJ</p>
+                                <p>Ahmedabad, Gujarat, India</p>
                             </div>
                         </div>
                     </div>
