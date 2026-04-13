@@ -7,14 +7,13 @@ import Script from "next/script";
 
 // Defer heavy components to reduce initial JS payload
 const ScrollyCanvas = dynamic(() => import("../components/ScrollyCanvas"), {
-  ssr: true,
+  ssr: false,
   loading: () => <div className="min-h-screen bg-black" />
 });
 const TextReveal = dynamic(() => import("../components/TextReveal"), { ssr: false });
 const Footer = dynamic(() => import("@/components/Footer"), { ssr: false });
-
-import FloatingElement from "../components/FloatingElement";
-import Magnet from "../components/Magnet";
+const FloatingElement = dynamic(() => import("../components/FloatingElement"), { ssr: false, loading: () => <div /> });
+const Magnet = dynamic(() => import("../components/Magnet"), { ssr: false, loading: () => <div /> });
 import Link from "next/link";
 import {
   Zap,

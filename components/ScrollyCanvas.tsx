@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useEffect, useRef, useState, useCallback } from "react";
-import { useScroll, useTransform, useMotionValueEvent, motion, MotionValue, AnimatePresence } from "framer-motion";
+import NextImage from "next/image";
+import { useScroll, useTransform, useMotionValueEvent, motion, MotionValue } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
@@ -33,19 +34,10 @@ export default function ScrollyCanvas({ frameCount, children }: ScrollyCanvasPro
   // Preload images
   useEffect(() => {
     const preloadImages = async () => {
-      console.log(`Starting preloading for ${frameCount} frames...`);
       const loadedImages: HTMLImageElement[] = [];
       const promises: Promise<void>[] = [];
 
       try {
-        // Create a safety timeout to ensure the loader eventually disappears
-        const timeoutPromise = new Promise<void>((resolve) => {
-          setTimeout(() => {
-            console.warn("Loading timeout reached: Proceeding with available frames.");
-            resolve();
-          }, 3500); // 3.5 second fallback (slightly more generous)
-        });
-
         for (let i = 0; i < frameCount; i++) {
           const img = new Image();
           const frameNum = i.toString().padStart(2, "0");
@@ -56,8 +48,7 @@ export default function ScrollyCanvas({ frameCount, children }: ScrollyCanvasPro
           const promise = new Promise<void>((resolve) => {
             img.onload = () => resolve();
             img.onerror = () => {
-              console.error(`ERROR: Failed to load ${fullPath}`);
-              resolve(); // Still resolve to not block everything
+              resolve(); // still resolve to avoid blocking
             };
           });
 
@@ -65,39 +56,28 @@ export default function ScrollyCanvas({ frameCount, children }: ScrollyCanvasPro
           loadedImages[i] = img;
         }
 
-        // Wait for either the first 5 frames OR the timeout
+        // Wait for first frame only; don't block paint
         await Promise.race([
-          Promise.all(promises.slice(0, 5)),
-          timeoutPromise
+          Promise.all(promises.slice(0, 1)),
+          new Promise((resolve) => setTimeout(resolve, 200))
         ]);
 
-        console.log("Setting isLoaded to true");
         setImages(loadedImages);
         setIsLoaded(true);
 
         // Continue preloading the rest in the background
         Promise.all(promises).then(() => {
-          console.log("All frames preloaded (or failed).");
           setImages([...loadedImages]);
-        }).catch(err => {
-          console.error("Background preloading error:", err);
-        });
+        }).catch(() => undefined);
 
       } catch (error) {
-        console.error("Critical error in preloadImages:", error);
         setIsLoaded(true); // Always force load on error
       }
     };
 
     preloadImages();
 
-    // Ultimate fallback: Force show page after 5 seconds no matter what
-    const forceTimer = setTimeout(() => {
-      console.log("Force loading after 5s...");
-      setIsLoaded(true);
-    }, 5000);
-
-    return () => clearTimeout(forceTimer);
+    return () => undefined;
   }, [frameCount]);
 
   // Helper render function
@@ -165,33 +145,33 @@ export default function ScrollyCanvas({ frameCount, children }: ScrollyCanvasPro
   const pointerEvents = useTransform<number, string>(scrollYProgress, (v: number) => v < 1 ? "auto" : "none") as unknown as MotionValue<string>;
 
   return (
-    <div ref={containerRef} className="relative w-full bg-black">
+    <div ref={containerRef} className="relative w-full bg-black min-h-screen">
       <motion.div
         ref={backgroundWrapperRef}
         style={{ opacity, pointerEvents }}
         className="sticky top-0 h-screen w-full overflow-hidden pointer-events-none -mb-[100vh]"
       >
+        {/* Poster image becomes the LCP target */}
+        <NextImage
+          src="/sequence/frame_00_delay-0.1s.webp"
+          alt="Hero poster"
+          fill
+          priority
+          fetchPriority="high"
+          sizes="100vw"
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+
         {/* Cinematic Noise Layer */}
         <div className="absolute inset-0 z-10 opacity-[0.03] pointer-events-none mix-blend-screen bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
 
         {/* Dark Cinematic Overlay */}
         <div className="absolute inset-0 z-10 bg-black/40 pointer-events-none" />
 
-        {/* Non-blocking loading state: only covers the canvas, not the children */}
-        <AnimatePresence>
-          {!isLoaded && (
-            <motion.div
-              initial={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 1 }}
-              className="absolute inset-0 bg-black z-10 flex items-center justify-center"
-            >
-              <div className="text-white/20 text-[10px] tracking-[1em] uppercase">
-                Initializing...
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+        {/* Lightweight shimmer while frames warm; never blocks LCP */}
+        {!isLoaded && (
+          <div className="absolute inset-0 z-20 pointer-events-none bg-gradient-to-b from-white/[0.03] via-transparent to-black/30 animate-pulse" aria-hidden />
+        )}
 
         <canvas
           ref={canvasRef}

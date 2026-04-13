@@ -1,31 +1,47 @@
 import type { NextConfig } from "next";
 import withBundleAnalyzer from "@next/bundle-analyzer";
 
+const withAnalyzer = withBundleAnalyzer({
+  enabled: process.env.ANALYZE === "true",
+});
+
 const nextConfig: NextConfig = {
   output: "export",
+  trailingSlash: true,
+  compress: true,
+  compiler: {
+    // strip console.* in prod bundles to reduce JS size
+    removeConsole: process.env.NODE_ENV === "production" ? { exclude: ["error", "warn"] } : false,
+  },
+  experimental: {
+    optimizePackageImports: ["framer-motion", "gsap", "lucide-react"],
+  },
+  modularizeImports: {
+    "lucide-react": {
+      transform: "lucide-react/dist/esm/icons/{{member}}",
+      preventFullImport: true,
+    },
+  },
   images: {
     unoptimized: true,
   },
-  // Note: headers are not supported for output: 'export' in standard Next.js 
-  // but if the user intends to use a server later, I'll provide them.
-  // For static export, caching occurs at the CDN/Host level.
   async headers() {
     return [
       {
+        source: "/_next/static/(.*)",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=31536000, immutable" },
+        ],
+      },
+      {
         source: "/(.*)",
         headers: [
-          {
-            key: "X-Content-Type-Options",
-            value: "nosniff",
-          },
+          { key: "Cache-Control", value: "public, s-maxage=86400, stale-while-revalidate=59" },
+          { key: "X-Content-Type-Options", value: "nosniff" },
         ],
       },
     ];
   },
 };
-
-const withAnalyzer = withBundleAnalyzer({
-  enabled: process.env.ANALYZE === "true",
-});
 
 export default withAnalyzer(nextConfig);

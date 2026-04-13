@@ -1,11 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, DM_Sans, Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
-import ScrollProgress from "@/components/ScrollProgress";
-import SmoothScroll from "@/components/SmoothScroll";
-import ConditionalFooter from "@/components/ConditionalFooter";
-import CustomCursor from "@/components/CustomCursor";
+import ClientShell from "@/components/ClientShell";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -54,15 +50,15 @@ export default function RootLayout({
           type="image/webp"
           fetchPriority="high"
         />
+        <link rel="preconnect" href="https://asset.cal.com" />
+        <link rel="dns-prefetch" href="https://asset.cal.com" />
+        <link rel="preconnect" href="https://cal.com" />
+        <link rel="dns-prefetch" href="https://cal.com" />
       </head>
       <body className={`${inter.variable} ${dmSans.variable} ${cormorant.variable} font-sans bg-black text-white antialiased cursor-none`}>
-        <CustomCursor />
-        <SmoothScroll>
-          <ScrollProgress />
-          <Navbar />
+        <ClientShell>
           {children}
-          <ConditionalFooter />
-        </SmoothScroll>
+        </ClientShell>
       </body>
     </html>
   );
