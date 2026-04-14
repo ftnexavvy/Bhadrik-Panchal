@@ -173,9 +173,9 @@ export default function ContactPage() {
                                       justify-center mb-6">
                                                 <CheckCircle2 className="w-6 h-6 text-white" />
                                             </div>
-                                            <h3 className="text-2xl font-black uppercase italic tracking-tighter mb-3">
+                                            <h2 className="text-2xl font-black uppercase italic tracking-tighter mb-3">
                                                 Transmission Received.
-                                            </h3>
+                                            </h2>
                                             <p className="text-[9px] uppercase tracking-[0.4em] text-white/30">
                                                 A strategist will review your application within 24 hours.
                                             </p>

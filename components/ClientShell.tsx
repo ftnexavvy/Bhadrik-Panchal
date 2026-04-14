@@ -1,24 +1,28 @@
 "use client";
 
-import dynamic from "next/dynamic";
-import Navbar from "@/components/Navbar";
+import { ReactNode, useState, useEffect } from "react";
+import GlobalErrorHandler from "@/components/GlobalErrorHandler";
+import SmoothScroll from "@/components/SmoothScroll";
+import CustomCursor from "@/components/CustomCursor";
 import ScrollProgress from "@/components/ScrollProgress";
+import Navbar from "@/components/Navbar";
 import ConditionalFooter from "@/components/ConditionalFooter";
-import { ReactNode } from "react";
-
-const SmoothScroll = dynamic(() => import("@/components/SmoothScroll"), {
-  ssr: false,
-});
-
-const CustomCursor = dynamic(() => import("@/components/CustomCursor"), {
-  ssr: false,
-  loading: () => null,
-});
 
 export default function ClientShell({ children }: { children: ReactNode }) {
+  // Start false on both server and client to avoid hydration mismatch.
+  // After hydration, detect if this is a non-touch (desktop) device.
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setIsDesktop(!window.matchMedia("(pointer: coarse)").matches);
+    document.body.classList.add("app-ready");
+  }, []);
+
   return (
     <>
-      <CustomCursor />
+      <GlobalErrorHandler />
+      {isDesktop && <CustomCursor />}
       <SmoothScroll>
         <ScrollProgress />
         <Navbar />

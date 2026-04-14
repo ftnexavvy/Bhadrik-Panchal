@@ -66,11 +66,12 @@ const offerings = [
 
 const socialLinks = [
     { icon: <GoogleIcon className="w-4 h-4" />, href: "https://maps.app.goo.gl/9yxjdLKcRqmfL76T9", label: "Google" },
-    { icon: <InstagramIcon className="w-5 h-5" />, href: "https://www.instagram.com/panchalbhadrik/", label: "Instagram" },
-    { icon: <LinkedinIcon className="w-5 h-5" />, href: "https://www.linkedin.com/in/panchalbhadrik/", label: "LinkedIn" },
-    { icon: <YoutubeIcon className="w-5 h-5" />, href: "https://www.youtube.com/@panchalbhadrik", label: "YouTube" },
-    { icon: <XIcon className="w-4 h-4" />, href: "https://x.com/panchalbhadrik", label: "X" },
+    { icon: <InstagramIcon className="w-5 h-5" />, href: "https://www.instagram.com/bhadrikpanchal/", label: "Instagram" },
     { icon: <FacebookIcon className="w-5 h-5" />, href: "https://facebook.com/panchalbhadrik", label: "Facebook" },
+    { icon: <XIcon className="w-4 h-4" />, href: "https://x.com/panchalbhadrik", label: "X" },
+    { icon: <LinkedinIcon className="w-5 h-5" />, href: "https://www.linkedin.com/in/panchalbhadrik/", label: "LinkedIn" },
+    { icon: <YoutubeIcon className="w-5 h-5" />, href: "https://www.youtube.com/@bhadrikpanchal", label: "YouTube" },
+
 ];
 
 export default function Footer() {
@@ -120,7 +121,7 @@ export default function Footer() {
                     <div className="lg:col-span-7 grid grid-cols-2 md:grid-cols-3 gap-10">
                         {/* Nav */}
                         <div className="space-y-6">
-                            <h4 className="text-[10px] uppercase tracking-[0.4em] text-white/40 font-black">Menu</h4>
+                            <h3 className="text-[10px] uppercase tracking-[0.4em] text-white/40 font-black">Menu</h3>
                             <div className="flex flex-col gap-3">
                                 {navLinks.map((link) => (
                                     <Link key={link.name} href={link.href} className="text-xs text-gray-500 hover:text-white transition uppercase tracking-widest font-bold">
@@ -132,7 +133,7 @@ export default function Footer() {
 
                         {/* Offerings */}
                         <div className="space-y-6">
-                            <h4 className="text-[10px] uppercase tracking-[0.4em] text-white/40 font-black">Specialties</h4>
+                            <h3 className="text-[10px] uppercase tracking-[0.4em] text-white/40 font-black">Specialties</h3>
                             <div className="flex flex-col gap-3">
                                 {offerings.map((item) => (
                                     <span key={item} className="text-xs text-gray-500 hover:text-white transition cursor-default uppercase tracking-widest font-bold">
@@ -144,7 +145,7 @@ export default function Footer() {
 
                         {/* Contact */}
                         <div className="space-y-6 col-span-2 md:col-span-1">
-                            <h4 className="text-[10px] uppercase tracking-[0.4em] text-white/40 font-black">Hold</h4>
+                            <h3 className="text-[10px] uppercase tracking-[0.4em] text-white/40 font-black">Hold</h3>
                             <div className="space-y-4 text-xs font-bold uppercase tracking-widest text-gray-500">
                                 <a href="mailto:hello@bhadrikpanchal.com" className="block hover:text-white transition lowercase">hello@bhadrikpanchal.com</a>
                                 <p>Ahmedabad, Gujarat, India</p>
@@ -155,10 +156,10 @@ export default function Footer() {
 
                 {/* Bottom Bar */}
                 <div className="pt-10 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8">
-                    <div className="text-[10px] uppercase tracking-[0.2em] text-white/20 font-black flex items-center gap-4">
-                        <span>© {new Date().getFullYear()} bhadrik panchal</span>
+                    <div className="text-[10px] uppercase tracking-[0.2em] text-white/50 font-black flex items-center gap-4">
+                        <span>© {new Date().getFullYear()} bhadrik panchal | business coach • motivational speaker • entrepreneur</span>
                         <span className="hidden md:block w-8 h-[1px] bg-white/10" />
-                        <span className="hidden md:block italic text-white/10 italic">Built for the elite</span>
+                        <span className="hidden md:block italic text-white/50 italic">Built for the elite</span>
                     </div>
 
                     <div className="flex gap-4">

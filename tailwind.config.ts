@@ -26,8 +26,6 @@ export default {
             fontFamily: {
                 sans: ["var(--font-inter)", "sans-serif"],
                 dm: ["var(--font-dm)", "sans-serif"],
-                cormorant: ["var(--font-cormorant)", "serif"],
-                serif: ["var(--font-cormorant)", "serif"],
             },
             colors: {
                 background: "var(--background)",

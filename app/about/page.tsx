@@ -4,7 +4,6 @@ import React from "react";
 import { motion } from "framer-motion";
 import FloatingElement from "../../components/FloatingElement";
 import TextReveal from "../../components/TextReveal";
-import Image from "next/image";
 import Magnet from "../../components/Magnet";
 import Link from "next/link";
 import { Target, Rocket, Zap, Shield } from "lucide-react";
@@ -50,14 +49,19 @@ export default function AboutPage() {
                     {/* ── LEFT: IMAGE ── */}
                     <FloatingElement duration={8} yRange={[0, -20]} xRange={[0, 10]}>
                         <div className="relative aspect-[4/5] md:aspect-[5/6] rounded-2xl overflow-hidden group">
-                            <Image
-                                src="/assets/images/profile1.webp"
-                                alt="Bhadrik Panchal"
-                                fill
-                                className="object-cover transition-transform duration-[2s] group-hover:scale-[1.03]"
-                                sizes="(max-width: 768px) 100vw, 50vw"
-                                priority
-                            />
+                            <picture className="absolute inset-0 block h-full w-full">
+                                <source srcSet="/assets/images/profile1.webp" type="image/webp" />
+                                <source srcSet="/assets/images/profile1.jpg" type="image/jpeg" />
+                                <img
+                                    src="/assets/images/profile1.jpg"
+                                    alt="Bhadrik Panchal"
+                                    width={960}
+                                    height={1088}
+                                    loading="lazy"
+                                    decoding="async"
+                                    className="h-full w-full object-cover transition-transform duration-[2s] group-hover:scale-[1.03]"
+                                />
+                            </picture>
                             <div className="absolute inset-0 bg-gradient-to-t from-black via-black/35 to-transparent z-10" />
                             <div className="
           absolute inset-0 flex items-center justify-center z-10 pointer-events-none
@@ -183,11 +187,11 @@ export default function AboutPage() {
                         </h2>
                         <div className="grid md:grid-cols-2 gap-12">
                             {[
-                                "Clarity beats hard work every single time.",
-                                "Most businesses don&apos;t fail; they stay confused until they die.",
-                                "Systems facilitate scale. Effort solo facilitates burnout.",
-                                "If you can&apos;t describe your business in one page, you don&apos;t have a business.",
-                                "Growth is a choice made through discipline, not luck."
+                                "Clarity creates power. Confusion destroys businesses.",
+                                "Most people don’t fail — they never get clear enough to win.",
+                                "Systems scale what effort never can.",
+                                "If your business isn’t simple, it isn’t scalable.",
+                                "Discipline builds growth. Luck only delays failure."
                             ].map((belief, i) => (
                                 <motion.div
                                     key={i}

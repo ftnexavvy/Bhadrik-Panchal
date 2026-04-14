@@ -237,9 +237,7 @@ export default function ServicesPage() {
 
                             {/* CTA Button */}
                             <a
-                                href="https://cal.id/bhadrik-panchal-business-coach"
-                                target="_blank"
-                                rel="noopener noreferrer"
+                                href="/contact"
                                 className={`
                                     mt-8 w-full rounded-full
                                     /* Font size per breakpoint */
@@ -329,9 +327,9 @@ export default function ServicesPage() {
 
                     {/* FAQ heading */}
                     <div className="mb-12 sm:mb-16 md:mb-20 lg:mb-24 text-center">
-                        <h2 className="text-[10px] sm:text-xs uppercase tracking-[0.5em] text-gray-500 mb-4 sm:mb-6 font-medium">
+                        <p className="text-[10px] sm:text-xs uppercase tracking-[0.5em] text-gray-500 mb-4 sm:mb-6 font-medium">
                             Common Intel
-                        </h2>
+                        </p>
                         {/*
                          *  mobile  → 3rem
                          *  sm      → 5rem
@@ -340,7 +338,7 @@ export default function ServicesPage() {
                          *  xl/1280 → 8rem
                          *  2xl     → 9rem
                          */}
-                        <h1 className="
+                        <h2 className="
                             text-[3rem] leading-[0.9]
                             sm:text-[5rem]
                             md:text-[7rem]
@@ -350,7 +348,7 @@ export default function ServicesPage() {
                             font-black uppercase mb-8 sm:mb-10 italic
                         ">
                             QUESTIONS.
-                        </h1>
+                        </h2>
                     </div>
 
                     {/* FAQ items */}

@@ -4,7 +4,12 @@
 import React from "react";
 import SectionWrapper from "@/components/SectionWrapper";
 import { motion } from "framer-motion";
-import StackedCards from "@/components/StackedCards";
+import dynamic from "next/dynamic";
+
+const StackedCards = dynamic(() => import("@/components/StackedCards"), {
+    ssr: false,
+    loading: () => <div className="w-full" style={{ minHeight: "180vh" }} aria-hidden />,
+});
 
 const cases = [
     {
@@ -126,12 +131,12 @@ export default function CaseStudiesPage() {
                         whileInView={{ opacity: 1, scale: 1 }}
                         className="max-w-4xl mx-auto"
                     >
-                        <h2 className="text-[10px] uppercase tracking-[0.5em] text-gray-400 mb-8 font-bold font-dm">
+                        <p className="text-[10px] uppercase tracking-[0.5em] text-gray-400 mb-8 font-bold font-dm">
                             Global Influence
-                        </h2>
-                        <h1 className="text-4xl sm:text-7xl md:text-[9rem] font-black uppercase leading-[0.9] mb-10 italic font-sans">
+                        </p>
+                        <h2 className="text-4xl sm:text-7xl md:text-[9rem] font-black uppercase leading-[0.9] mb-10 italic font-sans">
                             WIDER IMPACT.
-                        </h1>
+                        </h2>
                         <p className="text-lg md:text-3xl font-medium uppercase tracking-tight max-w-3xl mx-auto leading-tight italic font-dm">
                             Working with founders across industries <br /> to bring clarity, structure, <br /> and scalable growth.
                         </p>

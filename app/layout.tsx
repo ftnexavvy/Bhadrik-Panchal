@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, DM_Sans, Cormorant_Garamond } from "next/font/google";
+import { Inter, DM_Sans } from "next/font/google";
 import "./globals.css";
 import ClientShell from "@/components/ClientShell";
 
@@ -15,13 +15,7 @@ const dmSans = DM_Sans({
   display: "swap",
 });
 
-const cormorant = Cormorant_Garamond({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
-  style: ["normal", "italic"],
-  variable: "--font-cormorant",
-  display: "swap",
-});
+
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -42,20 +36,58 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <head>
-        {/* Preload the first frame of the scrolly sequence as it is the LCP element */}
+        {/* Only preconnect to origins actually used at page load */}
+        <link rel="preconnect" href="https://asset.cal.com" />
+        <link rel="dns-prefetch" href="https://api.web3forms.com" />
+
+        {/* Inline critical CSS to eliminate render-blocking network request */}
+        <style dangerouslySetInnerHTML={{ __html: `html,body{overflow-x:clip;max-width:100%;position:relative}body{background:#000;color:#fff}` }} />
+
+        {/* Preload LCP hero image with responsive sources */}
         <link
           rel="preload"
-          href="/sequence/frame_00_delay-0.1s.webp"
+          href="/sequence/frame_00_delay-0.1s-400.webp"
           as="image"
+          imageSrcSet="/sequence/frame_00_delay-0.1s-400.webp 400w, /sequence/frame_00_delay-0.1s.webp 800w"
+          imageSizes="100vw"
           type="image/webp"
           fetchPriority="high"
         />
-        <link rel="preconnect" href="https://asset.cal.com" />
-        <link rel="dns-prefetch" href="https://asset.cal.com" />
-        <link rel="preconnect" href="https://cal.com" />
-        <link rel="dns-prefetch" href="https://cal.com" />
+        <link
+          rel="preload"
+          href="/sequence/frame_00_delay-0.1s-400.jpg"
+          as="image"
+          imageSrcSet="/sequence/frame_00_delay-0.1s-400.jpg 400w, /sequence/frame_00_delay-0.1s.jpg 800w"
+          imageSizes="100vw"
+          type="image/jpeg"
+          fetchPriority="high"
+        />
       </head>
-      <body className={`${inter.variable} ${dmSans.variable} ${cormorant.variable} font-sans bg-black text-white antialiased cursor-none`}>
+      <body className={`${inter.variable} ${dmSans.variable} font-sans bg-black text-white antialiased cursor-none`}>
+        <div id="initial-lcp-fallback" aria-hidden className="fixed inset-0 bg-black pointer-events-none">
+          <picture className="absolute inset-0 block h-full w-full">
+            <source
+              srcSet="/sequence/frame_00_delay-0.1s-400.webp 400w, /sequence/frame_00_delay-0.1s.webp 800w"
+              sizes="100vw"
+              type="image/webp"
+            />
+            <source
+              srcSet="/sequence/frame_00_delay-0.1s-400.jpg 400w, /sequence/frame_00_delay-0.1s.jpg 800w"
+              sizes="100vw"
+              type="image/jpeg"
+            />
+            <img
+              src="/sequence/frame_00_delay-0.1s.jpg"
+              alt=""
+              width={800}
+              height={450}
+              fetchPriority="high"
+              decoding="async"
+              className="h-full w-full object-cover"
+            />
+          </picture>
+          <div className="absolute inset-0 bg-black/40" />
+        </div>
         <ClientShell>
           {children}
         </ClientShell>

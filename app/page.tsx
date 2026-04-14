@@ -3,18 +3,18 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import dynamic from "next/dynamic";
+import Link from "next/link";
 import Script from "next/script";
 
 // Defer heavy components to reduce initial JS payload
 const ScrollyCanvas = dynamic(() => import("../components/ScrollyCanvas"), {
-  ssr: false,
+  ssr: true,
   loading: () => <div className="min-h-screen bg-black" />
 });
-const TextReveal = dynamic(() => import("../components/TextReveal"), { ssr: false });
-const Footer = dynamic(() => import("@/components/Footer"), { ssr: false });
-const FloatingElement = dynamic(() => import("../components/FloatingElement"), { ssr: false, loading: () => <div /> });
-const Magnet = dynamic(() => import("../components/Magnet"), { ssr: false, loading: () => <div /> });
-import Link from "next/link";
+const TextReveal = dynamic(() => import("../components/TextReveal"), { ssr: true });
+const Footer = dynamic(() => import("@/components/Footer"));
+const FloatingElement = dynamic(() => import("../components/FloatingElement"), { loading: () => <div /> });
+const Magnet = dynamic(() => import("../components/Magnet"), { loading: () => <div /> });
 import {
   Zap,
   ChevronRight,
@@ -136,8 +136,12 @@ export default function Home() {
     <main className="bg-black text-white selection:bg-white selection:text-black">
       {/* Lazy load Cal.com embed script */}
       <Script
+        id="cal-embed-script"
         src="https://asset.cal.com/embed/embed.js"
         strategy="lazyOnload"
+        onError={(event) => {
+          console.error("[CalEmbedScriptError]", event);
+        }}
       />
 
       <ScrollyCanvas frameCount={80}>
@@ -150,18 +154,15 @@ export default function Home() {
 
           <div className="max-w-[1200px] mx-auto w-full relative z-10">
             {/* 🔥 Heading */}
-            <motion.h1
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1.2, ease: [0.33, 1, 0.68, 1] }}
-              className="text-[2.2rem] sm:text-7xl lg:text-[4.5rem] xl:text-[5rem] 2xl:text-[8rem] 4xl:text-[10rem] font-black uppercase leading-[1.1] sm:leading-[0.9] mb-8 sm:mb-10 italic [word-spacing:0.05em] px-2"
+            <h1
+              className="text-[2.2rem] sm:text-7xl lg:text-[4.5rem] xl:text-[5rem] 2xl:text-[8rem] 4xl:text-[10rem] font-black uppercase leading-[1.1] sm:leading-[0.9] mb-8 sm:mb-10 italic [word-spacing:0.05em] px-2 animate-[fadeUp_1.2s_cubic-bezier(0.33,1,0.68,1)_both]"
             >
               GROWTH IS NOT<br />
               <span className="relative inline-block text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-500">
                 LUCK IT’S SYSTEM
                 <span className="absolute inset-0 blur-xl bg-white/20 opacity-40"></span>
               </span>
-            </motion.h1>
+            </h1>
 
             {/* 🔥 Subtext */}
             <div className="max-w-2xl mx-auto px-4 sm:px-0">
@@ -174,12 +175,7 @@ export default function Home() {
           </div>
 
           {/* 🔥 CTA Buttons */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.2, duration: 1 }}
-            className="flex flex-col sm:flex-row gap-4"
-          >
+          <div className="flex flex-col sm:flex-row gap-4 animate-[fadeUp_1s_1.2s_cubic-bezier(0.33,1,0.68,1)_both]">
             <Magnet strength={0.2}>
               <a
                 href="https://cal.id/bhadrik-panchal-business-coach"
@@ -199,9 +195,7 @@ export default function Home() {
               VIEW RESULTS
               <ArrowRight className="w-3 h-3 md:w-4 md:h-4 xl:w-3 xl:h-3 2xl:w-4 2xl:h-4 4xl:w-5 4xl:h-5 group-hover:translate-x-1 transition-transform" />
             </Link>
-          </motion.div>
-
-          {/* 🔥 Floating Elements */}
+          </div>
           <FloatingElement
             duration={7}
             delay={0}

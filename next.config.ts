@@ -9,6 +9,7 @@ const nextConfig: NextConfig = {
   output: "export",
   trailingSlash: true,
   compress: true,
+  productionBrowserSourceMaps: false,
   compiler: {
     // strip console.* in prod bundles to reduce JS size
     removeConsole: process.env.NODE_ENV === "production" ? { exclude: ["error", "warn"] } : false,
@@ -24,23 +25,6 @@ const nextConfig: NextConfig = {
   },
   images: {
     unoptimized: true,
-  },
-  async headers() {
-    return [
-      {
-        source: "/_next/static/(.*)",
-        headers: [
-          { key: "Cache-Control", value: "public, max-age=31536000, immutable" },
-        ],
-      },
-      {
-        source: "/(.*)",
-        headers: [
-          { key: "Cache-Control", value: "public, s-maxage=86400, stale-while-revalidate=59" },
-          { key: "X-Content-Type-Options", value: "nosniff" },
-        ],
-      },
-    ];
   },
 };
 
