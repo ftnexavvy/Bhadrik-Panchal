@@ -112,7 +112,7 @@ export default function CaseStudiesPage() {
                         initial={{ opacity: 0, y: 16 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
-                        className="font-dm text-[11px] sm:text-[12px] tracking-[0.28em] uppercase text-white/70 max-w-[480px] mx-auto leading-[1.8]"
+                        className="font-dm text-[11px] sm:text-[12px] tracking-[0.28em] uppercase text-white/70 max-w-120 mx-auto leading-[1.8]"
                     >
                         Real shifts in thinking, structure, and business growth.
                         Proof that clarity leads to control.
@@ -125,7 +125,13 @@ export default function CaseStudiesPage() {
 
             {/* Global Influence Section */}
             <section className="bg-white text-black py-48 relative z-10">
-                <div className="max-w-[1200px] mx-auto text-center px-6">
+                <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none">
+                    <span className="text-[18vw] font-black italic opacity-[0.05] tracking-tighter leading-none">
+                        IMPACT.
+                    </span>
+                </div>
+
+                <div className="max-w-300 mx-auto text-center px-6">
                     <motion.div
                         initial={{ opacity: 0, scale: 0.95 }}
                         whileInView={{ opacity: 1, scale: 1 }}

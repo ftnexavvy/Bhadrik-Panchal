@@ -131,7 +131,7 @@ export default function ServicesPage() {
                      *  2xl     → 8.5rem
                      */}
                     <h1 className="
-                        text-[2rem] leading-[1]
+                        text-[2rem] leading-none
                         sm:text-[3.5rem] sm:leading-[0.95]
                         md:text-[5rem]   md:leading-[0.9]
                         lg:text-[6rem]
@@ -161,7 +161,7 @@ export default function ServicesPage() {
                     relative text-center
                 ">
                     {/* Background glow */}
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] md:w-[600px] xl:w-[800px] h-[400px] md:h-[600px] xl:h-[800px] bg-white/5 rounded-full blur-[100px] -z-10 pointer-events-none" />
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-100 md:w-150 xl:w-200 h-100 md:h-150 xl:h-200 bg-white/5 rounded-full blur-[100px] -z-10 pointer-events-none" />
 
                     {programs.map((program, i) => (
                         <motion.div
@@ -178,7 +178,7 @@ export default function ServicesPage() {
                                 /* Layout */
                                 border flex flex-col justify-between
                                 /* Min height scales with viewport */
-                                min-h-[560px] sm:min-h-[500px] md:min-h-[520px]
+                                min-h-140 sm:min-h-125 md:min-h-130
                                 /* Transitions */
                                 transition-all duration-700 group hover:scale-[1.02] cursor-pointer
                                 ${program.popular
@@ -246,7 +246,7 @@ export default function ServicesPage() {
                                     /* Padding per breakpoint */
                                     px-5 py-3 sm:px-7 sm:py-3.5 md:px-8 md:py-4 xl:px-7 xl:py-3.5 2xl:px-9 2xl:py-4
                                     /* Min height for touch targets */
-                                    min-h-[42px] sm:min-h-[46px] md:min-h-[52px]
+                                    min-h-10.5 sm:min-h-11.5 md:min-h-13
                                     flex items-center justify-center
                                     transition-all duration-700 active:scale-95
                                     ${program.popular
@@ -264,6 +264,11 @@ export default function ServicesPage() {
 
             {/* ── DITCH EFFORT / GET CLARITY CTA ── */}
             <SectionWrapper className="bg-white text-black py-24 sm:py-32 md:py-40 lg:py-48 text-center relative overflow-hidden">
+                <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none">
+                    <span className="text-[18vw] font-black italic opacity-[0.05] tracking-tighter leading-none">
+                        CLARITY.
+                    </span>
+                </div>
                 <motion.div
                     initial={{ opacity: 0, y: 50 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -310,7 +315,7 @@ export default function ServicesPage() {
                             /* Padding */
                             px-8 py-3.5 sm:px-10 sm:py-4 md:px-10 md:py-5 xl:px-10 xl:py-5 2xl:px-12 2xl:py-6
                             /* Min height */
-                            min-h-[44px] sm:min-h-[50px] md:min-h-[56px] xl:min-h-[60px]
+                            min-h-11 sm:min-h-12.5 md:min-h-14 xl:min-h-15
                             hover:scale-110 active:scale-95 transition-all shadow-2xl
                         "
                     >
@@ -318,7 +323,7 @@ export default function ServicesPage() {
                     </a>
                 </motion.div>
 
-                <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-gray-100 to-transparent -z-0" />
+                <div className="absolute bottom-0 left-0 w-full h-1/2 bg-linear-to-t from-gray-100 to-transparent z-0" />
             </SectionWrapper>
 
             {/* ── FAQ SECTION ── */}

@@ -139,9 +139,6 @@ export default function Home() {
         id="cal-embed-script"
         src="https://asset.cal.com/embed/embed.js"
         strategy="lazyOnload"
-        onError={(event) => {
-          console.error("[CalEmbedScriptError]", event);
-        }}
       />
 
       <ScrollyCanvas frameCount={80}>

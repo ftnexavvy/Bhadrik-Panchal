@@ -79,7 +79,7 @@ export default function ContactPage() {
 
             {/* ── HERO SPLIT ── */}
             <SectionWrapper className="pt-28 md:pt-36 pb-0">
-                <div className="max-w-[1280px] mx-auto grid lg:grid-cols-2 gap-12 xl:gap-20 items-start pb-20 xl:pb-28">
+                <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 xl:gap-20 items-start pb-20 xl:pb-28">
 
                     {/* LEFT */}
                     <div>
@@ -135,7 +135,7 @@ export default function ContactPage() {
                                         href={`mailto:${info.value}`}
                                         className="text-base md:text-xl font-black tracking-tight text-white/60
                                     group-hover:text-white transition-colors duration-300
-                                    group-hover:pl-2 transition-all duration-400 block lowercase"
+                                    group-hover:pl-2 block lowercase"
                                     >
                                         {info.value}
                                     </a>
@@ -152,12 +152,12 @@ export default function ContactPage() {
                         className="relative"
                     >
                         {/* Card highlight ring on focus-within */}
-                        <div className="relative rounded-[2rem] border border-white/10
+                        <div className="relative rounded-4xl border border-white/10
                             focus-within:border-white/25 transition-colors duration-500
-                            bg-white/[0.03] backdrop-blur-2xl overflow-hidden">
+                            bg-white/3 backdrop-blur-2xl overflow-hidden">
 
                             {/* Top accent line */}
-                            <div className="h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+                            <div className="h-px bg-linear-to-r from-transparent via-white/20 to-transparent" />
 
                             <div className="p-8 md:p-12 xl:p-14">
                                 <AnimatePresence mode="wait">
@@ -189,7 +189,7 @@ export default function ContactPage() {
                                             {/* Name */}
                                             <div>
                                                 <div className="flex justify-between items-center mb-2.5">
-                                                    <label className="text-[8px] uppercase tracking-[0.45em] text-white/25 font-bold">
+                                                    <label className="text-[8px] uppercase tracking-[0.45em] text-white font-bold">
                                                         The Name
                                                     </label>
                                                     {errors.name && (
@@ -208,7 +208,7 @@ export default function ContactPage() {
                                                         className={`w-full bg-transparent py-4 text-white text-[11px] font-bold
                                        tracking-[0.2em] uppercase outline-none border-b placeholder:text-white/15
                                        transition-colors duration-300
-                                       ${errors.name ? "border-red-500/40" : "border-white/[0.08] focus:border-white/15"}`}
+                                       ${errors.name ? "border-red-500/40" : "border-white/8 focus:border-white/15"}`}
                                                     />
                                                 </div>
                                             </div>
@@ -216,7 +216,7 @@ export default function ContactPage() {
                                             {/* Email */}
                                             <div>
                                                 <div className="flex justify-between items-center mb-2.5">
-                                                    <label className="text-[8px] uppercase tracking-[0.45em] text-white/25 font-bold">
+                                                    <label className="text-[8px] uppercase tracking-[0.45em] text-white font-bold">
                                                         The Email
                                                     </label>
                                                     {errors.email && (
@@ -236,14 +236,14 @@ export default function ContactPage() {
                                                         className={`w-full bg-transparent py-4 text-white text-[11px] font-bold
                                        tracking-[0.2em] lowercase outline-none border-b placeholder:text-white/15
                                        transition-colors duration-300
-                                       ${errors.email ? "border-red-500/40" : "border-white/[0.08] focus:border-white/15"}`}
+                                       ${errors.email ? "border-red-500/40" : "border-white/8 focus:border-white/15"}`}
                                                     />
                                                 </div>
                                             </div>
                                             {/* Phone */}
                                             <div>
                                                 <div className="flex justify-between items-center mb-2.5">
-                                                    <label className="text-[8px] uppercase tracking-[0.45em] text-white/25 font-bold">
+                                                    <label className="text-[8px] uppercase tracking-[0.45em] text-white font-bold">
                                                         Contact Number
                                                     </label>
                                                 </div>
@@ -259,14 +259,14 @@ export default function ContactPage() {
                                                         placeholder="Your phone number"
                                                         className="w-full bg-transparent py-4 text-white text-[11px] font-bold
       tracking-[0.2em] outline-none border-b placeholder:text-white/15
-      transition-colors duration-300 border-white/[0.08] focus:border-white/15"
+      transition-colors duration-300 border-white/8 focus:border-white/15"
                                                     />
 
                                                 </div>
                                             </div>
                                             {/* Stage — pill selector instead of dropdown */}
                                             <div>
-                                                <label className="text-[8px] uppercase tracking-[0.45em] text-white/25 font-bold mb-3 block">
+                                                <label className="text-[8px] uppercase tracking-[0.45em] text-white font-bold mb-3 block">
                                                     Business Stage
                                                 </label>
                                                 <div className="flex flex-wrap gap-2">
@@ -291,7 +291,7 @@ export default function ContactPage() {
                                             {/* Message */}
                                             <div>
                                                 <div className="flex justify-between items-center mb-2.5">
-                                                    <label className="text-[8px] uppercase tracking-[0.45em] text-white/25 font-bold">
+                                                    <label className="text-[8px] uppercase tracking-[0.45em] text-white font-bold">
                                                         Main Challenge
                                                     </label>
                                                     {errors.message && (
@@ -311,7 +311,7 @@ export default function ContactPage() {
                                                         className={`w-full bg-transparent py-4 text-white text-[11px] font-bold
                                        tracking-[0.15em] uppercase outline-none border-b resize-none
                                        placeholder:text-white/15 transition-colors duration-300
-                                       ${errors.message ? "border-red-500/40" : "border-white/[0.08] focus:border-white/15"}`}
+                                       ${errors.message ? "border-red-500/40" : "border-white/8 focus:border-white/15"}`}
                                                     />
                                                 </div>
                                             </div>

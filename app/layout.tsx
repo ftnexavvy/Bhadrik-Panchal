@@ -24,8 +24,17 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "Bhadrik Panchal | Business Coach • Motivational Speaker • Entrepreneur",
-  description: "Helping vyaparis grow into 7-figure entrepreneurs using 15+ years of relentless digital marketing strategy and combat-tested systems.",
+  title: "Bhadrik Panchal Ahemdabad, Gujarat | Business Coach • Motivational Speaker • Entrepreneur",
+  description:
+    "Unlock business growth with clarity, systems, and disciplined execution. Bhadrik Panchal helps entrepreneurs scale faster with strategic precision and control.",
+  keywords: [
+    "business coach",
+    "business growth",
+    "scaling",
+    "systems",
+    "clarity",
+    "entrepreneur coaching",
+  ],
 };
 
 export default function RootLayout({
