@@ -93,7 +93,7 @@ export default function Footer() {
                     {/* Brand & CTA Unified */}
                     <div className="lg:col-span-5 space-y-8">
                         <div>
-                            <Link href="/" className="text-2xl font-black uppercase tracking-tighter">
+                            <Link href="/" prefetch={false} className="text-2xl font-black uppercase tracking-tighter">
                                 BHADRIK <span className="text-gray-500 italic">PANCHAL</span>
                             </Link>
                             <p className="text-[10px] uppercase tracking-[0.5em] text-white/30 font-bold mt-2">
@@ -121,10 +121,10 @@ export default function Footer() {
                     <div className="lg:col-span-7 grid grid-cols-2 md:grid-cols-3 gap-10">
                         {/* Nav */}
                         <div className="space-y-6">
-                            <h3 className="text-[10px] uppercase tracking-[0.4em] text-white/40 font-black">Menu</h3>
+                            <h3 className="text-[10px] uppercase tracking-[0.4em] text-white/65 font-black">Menu</h3>
                             <div className="flex flex-col gap-3">
                                 {navLinks.map((link) => (
-                                    <Link key={link.name} href={link.href} className="text-xs text-gray-500 hover:text-white transition uppercase tracking-widest font-bold">
+                                    <Link key={link.name} href={link.href} prefetch={false} className="text-xs text-gray-500 hover:text-white transition uppercase tracking-widest font-bold">
                                         {link.name}
                                     </Link>
                                 ))}
@@ -133,7 +133,7 @@ export default function Footer() {
 
                         {/* Offerings */}
                         <div className="space-y-6">
-                            <h3 className="text-[10px] uppercase tracking-[0.4em] text-white/40 font-black">Specialties</h3>
+                            <h3 className="text-[10px] uppercase tracking-[0.4em] text-white/65 font-black">Specialties</h3>
                             <div className="flex flex-col gap-3">
                                 {offerings.map((item) => (
                                     <span key={item} className="text-xs text-gray-500 hover:text-white transition cursor-default uppercase tracking-widest font-bold">
@@ -145,7 +145,7 @@ export default function Footer() {
 
                         {/* Contact */}
                         <div className="space-y-6 col-span-2 md:col-span-1">
-                            <h3 className="text-[10px] uppercase tracking-[0.4em] text-white/40 font-black">Hold</h3>
+                            <h3 className="text-[10px] uppercase tracking-[0.4em] text-white/65 font-black">Hold</h3>
                             <div className="space-y-4 text-xs font-bold uppercase tracking-widest text-gray-500">
                                 <a href="mailto:hello@bhadrikpanchal.com" className="block hover:text-white transition lowercase">hello@bhadrikpanchal.com</a>
                                 <p>Ahmedabad, Gujarat, India</p>

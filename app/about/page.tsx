@@ -411,7 +411,7 @@ export default function AboutPage() {
                         viewport={{ once: true }}
                         className="h-0.5 bg-white mx-auto mb-12"
                     />
-                    <p className="text-lg md:text-xl xl:text-xl 2xl:text-2xl text-white/40 uppercase tracking-[0.2em] font-black max-w-2xl mx-auto">
+                    <p className="text-lg md:text-xl xl:text-xl 2xl:text-2xl text-white/70 uppercase tracking-[0.2em] font-black max-w-2xl mx-auto">
                         AHMEDABAD’S LEADING BUSINESS GROWTH MENTOR — BHADRIK PANCHAL
                     </p>
 

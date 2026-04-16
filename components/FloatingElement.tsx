@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 interface FloatingElementProps {
     children: React.ReactNode;
@@ -20,6 +20,26 @@ export default function FloatingElement({
     xRange = [0, 8],
     className = "",
 }: FloatingElementProps) {
+    const [canAnimate, setCanAnimate] = useState(false);
+
+    useEffect(() => {
+        const media = window.matchMedia("(pointer: coarse), (max-width: 1024px), (prefers-reduced-motion: reduce)");
+        const update = () => setCanAnimate(!media.matches);
+        update();
+
+        if (typeof media.addEventListener === "function") {
+            media.addEventListener("change", update);
+            return () => media.removeEventListener("change", update);
+        }
+
+        media.addListener(update);
+        return () => media.removeListener(update);
+    }, []);
+
+    if (!canAnimate) {
+        return <div className={className}>{children}</div>;
+    }
+
     return (
         <motion.div
             animate={{

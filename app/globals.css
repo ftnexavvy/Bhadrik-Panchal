@@ -2,7 +2,7 @@
 
 @theme {
   --font-inter: var(--font-inter);
-  --font-dm: var(--font-dm);
+  --font-dm: var(--font-inter);
   --font-sans: var(--font-inter), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 }
 
@@ -22,15 +22,6 @@ body {
   color: var(--foreground);
   background: var(--background);
   font-family: var(--font-sans);
-}
-
-#initial-lcp-fallback {
-  opacity: 1;
-  transition: opacity 250ms ease;
-}
-
-body.app-ready #initial-lcp-fallback {
-  opacity: 0;
 }
 
 @layer utilities {

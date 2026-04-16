@@ -16,7 +16,6 @@ export default function ClientShell({ children }: { children: ReactNode }) {
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsDesktop(!window.matchMedia("(pointer: coarse)").matches);
-    document.body.classList.add("app-ready");
   }, []);
 
   return (
@@ -24,7 +23,7 @@ export default function ClientShell({ children }: { children: ReactNode }) {
       <GlobalErrorHandler />
       {isDesktop && <CustomCursor />}
       <SmoothScroll>
-        <ScrollProgress />
+        {isDesktop && <ScrollProgress />}
         <Navbar />
         {children}
         <ConditionalFooter />

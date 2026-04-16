@@ -32,6 +32,21 @@ export default function Navbar() {
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
+    useEffect(() => {
+        if (!mobileMenuOpen) return;
+
+        const previousOverflow = document.body.style.overflow;
+        const previousTouchAction = document.body.style.touchAction;
+
+        document.body.style.overflow = "hidden";
+        document.body.style.touchAction = "none";
+
+        return () => {
+            document.body.style.overflow = previousOverflow;
+            document.body.style.touchAction = previousTouchAction;
+        };
+    }, [mobileMenuOpen]);
+
     return (
         <>
             <nav
@@ -46,7 +61,7 @@ export default function Navbar() {
                     <FloatingElement duration={5} xRange={[0, 3]} yRange={[0, -5]}>
                         <Link href="/" className="text-xl md:text-2xl font-black tracking-tighter uppercase text-white flex items-center gap-2 group">
                             <span className="bg-white text-black px-2 py-0.5 rounded-sm">BHADRIK</span>
-                            <span className="text-gray-400 group-hover:text-white transition-colors duration-500">PANCHAL</span>
+                            <span className="text-gray-300 group-hover:text-white transition-colors duration-500">PANCHAL</span>
                         </Link>
                     </FloatingElement>
 
@@ -57,6 +72,7 @@ export default function Navbar() {
                                 <Link
                                     key={item.name}
                                     href={item.href}
+                                    prefetch={false}
                                     className={`relative text-[10px] lg:text-[11px] uppercase tracking-widest lg:tracking-[0.1em] xl:tracking-[0.25em] 2xl:tracking-[0.4em] font-bold transition-all duration-300 group py-2 ${isHome ? "text-white/70 hover:text-white" : "text-gray-500 hover:text-white"
                                         }`}
                                 >
@@ -85,6 +101,9 @@ export default function Navbar() {
                     <button
                         className="lg:hidden flex flex-col gap-1.5 z-[110] p-2"
                         onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                        aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+                        aria-expanded={mobileMenuOpen}
+                        aria-controls="mobile-nav-menu"
                     >
                         <motion.span
                             animate={mobileMenuOpen ? { rotate: 45, y: 8 } : { rotate: 0, y: 0 }}
@@ -106,6 +125,7 @@ export default function Navbar() {
             <AnimatePresence>
                 {mobileMenuOpen && (
                     <motion.div
+                        id="mobile-nav-menu"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
@@ -121,6 +141,7 @@ export default function Navbar() {
                                 >
                                     <Link
                                         href={item.href}
+                                        prefetch={false}
                                         onClick={() => setMobileMenuOpen(false)}
                                         className="text-2xl sm:text-4xl uppercase sm:tracking-[0.5em] tracking-[0.3em] font-black text-white hover:text-gray-400 transition-colors py-2 sm:py-4 px-8 w-full text-center block"
                                     >

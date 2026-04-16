@@ -102,9 +102,10 @@ export default function CaseStudiesPage() {
                         initial={{ opacity: 0, y: 28 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1], delay: 0.15 }}
-                        className="font-sans text-[clamp(42px,9vw,110px)] uppercase italic font-black leading-[0.9] text-white mb-7 sm:mb-9 tracking-[-0.015em] text-center w-full"
+                        className="font-sans text-[clamp(38px,9vw,110px)] uppercase italic font-black leading-[0.95] sm:leading-[0.9] text-white mb-7 sm:mb-9 tracking-[-0.01em] sm:tracking-[-0.015em] text-center w-full mx-auto px-2 sm:px-0 flex flex-col items-center"
                     >
-                        Real<br />Transformations.
+                        <span className="block">Real</span>
+                        <span className="block pr-[0.08em]">Transformations.</span>
                     </motion.h1>
 
                     {/* Description */}

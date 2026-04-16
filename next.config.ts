@@ -16,6 +16,7 @@ const nextConfig: NextConfig = {
   },
   experimental: {
     optimizePackageImports: ["framer-motion", "gsap", "lucide-react"],
+    inlineCss: true,
   },
   modularizeImports: {
     "lucide-react": {

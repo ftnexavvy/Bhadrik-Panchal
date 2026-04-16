@@ -2,19 +2,12 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import dynamic from "next/dynamic";
 import Link from "next/link";
 import Script from "next/script";
-
-// Defer heavy components to reduce initial JS payload
-const ScrollyCanvas = dynamic(() => import("../components/ScrollyCanvas"), {
-  ssr: true,
-  loading: () => <div className="min-h-screen bg-black" />
-});
-const TextReveal = dynamic(() => import("../components/TextReveal"), { ssr: true });
-const Footer = dynamic(() => import("@/components/Footer"));
-const FloatingElement = dynamic(() => import("../components/FloatingElement"), { loading: () => <div /> });
-const Magnet = dynamic(() => import("../components/Magnet"), { loading: () => <div /> });
+import ScrollyCanvas from "@/components/ScrollyCanvas";
+import Footer from "@/components/Footer";
+import FloatingElement from "@/components/FloatingElement";
+import Magnet from "@/components/Magnet";
 import {
   Zap,
   ChevronRight,
@@ -143,7 +136,7 @@ export default function Home() {
 
       <ScrollyCanvas frameCount={80}>
         {/* Hero Content Section */}
-        <section className="relative min-h-[100vh] h-auto flex flex-col items-center justify-center text-center px-4 sm:px-6 overflow-hidden pt-32 sm:pt-40 md:pt-48 xl:pt-56 4xl:pt-72 pb-24 md:pb-32">
+        <section className="relative min-h-[100vh] h-auto flex flex-col items-center justify-center text-center px-4 sm:px-6 pt-32 sm:pt-40 md:pt-48 xl:pt-56 4xl:pt-72 pb-24 md:pb-32">
           {/* 🔥 Background Glow */}
           <div className="absolute inset-0 pointer-events-none">
             <div className="absolute top-1/2 left-1/2 w-[300px] h-[300px] sm:w-[500px] sm:h-[500px] lg:w-[600px] lg:h-[600px] bg-white/5 blur-[80px] sm:blur-[120px] rounded-full -translate-x-1/2 -translate-y-1/2" />
@@ -152,10 +145,10 @@ export default function Home() {
           <div className="max-w-[1200px] mx-auto w-full relative z-10">
             {/* 🔥 Heading */}
             <h1
-              className="text-[2.2rem] sm:text-7xl lg:text-[4.5rem] xl:text-[5rem] 2xl:text-[8rem] 4xl:text-[10rem] font-black uppercase leading-[1.1] sm:leading-[0.9] mb-8 sm:mb-10 italic [word-spacing:0.05em] px-2 animate-[fadeUp_1.2s_cubic-bezier(0.33,1,0.68,1)_both]"
+              className="text-[2.2rem] sm:text-7xl lg:text-[4.5rem] xl:text-[5rem] 2xl:text-[7.5rem] 4xl:text-[8.8rem] font-black uppercase leading-[1.1] sm:leading-[0.96] mb-8 sm:mb-10 italic [word-spacing:0.05em] px-3 sm:px-4 pr-[0.12em] [text-shadow:0_4px_18px_rgba(0,0,0,0.92)] sm:[text-shadow:none]"
             >
               GROWTH IS NOT<br />
-              <span className="relative inline-block text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-500">
+              <span className="relative inline-block pr-[0.1em] text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-500">
                 LUCK IT’S SYSTEM
                 <span className="absolute inset-0 blur-xl bg-white/20 opacity-40"></span>
               </span>
@@ -163,16 +156,14 @@ export default function Home() {
 
             {/* 🔥 Subtext */}
             <div className="max-w-2xl mx-auto px-4 sm:px-0">
-              <TextReveal
-                text="15+ years of real execution helping entrepreneurs build, scale and dominate using digital systems."
-                className="text-sm sm:text-xl md:text-xl 2xl:text-2xl text-gray-400 font-medium leading-relaxed justify-center mb-10 sm:mb-12"
-                delay={0.6}
-              />
+              <p className="text-sm sm:text-xl md:text-xl 2xl:text-2xl text-white sm:text-gray-300 font-medium leading-relaxed justify-center mb-10 sm:mb-12 [text-shadow:0_2px_12px_rgba(0,0,0,0.9)] sm:[text-shadow:none]">
+                15+ years of real execution helping entrepreneurs build, scale and dominate using digital systems.
+              </p>
             </div>
           </div>
 
           {/* 🔥 CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 animate-[fadeUp_1s_1.2s_cubic-bezier(0.33,1,0.68,1)_both]">
+          <div className="flex flex-col sm:flex-row gap-4">
             <Magnet strength={0.2}>
               <a
                 href="https://cal.id/bhadrik-panchal-business-coach"
@@ -187,6 +178,7 @@ export default function Home() {
 
             <Link
               href="/case-studies"
+              prefetch={false}
               className="group flex items-center justify-center gap-3 px-6 py-3 sm:px-8 sm:py-4 md:px-10 md:py-5 xl:px-6 xl:py-3 2xl:px-8 2xl:py-4 4xl:px-12 4xl:py-6 border border-white/20 text-white text-[9px] sm:text-[10px] md:text-[12px] xl:text-[8px] 2xl:text-[10px] 4xl:text-[14px] uppercase font-black tracking-[0.3em] rounded-full hover:bg-white hover:text-black transition-all duration-500 active:scale-95 min-h-[40px] sm:min-h-[48px] md:min-h-[56px] xl:min-h-[48px] 2xl:min-h-[52px] 4xl:min-h-[64px]"
             >
               VIEW RESULTS
@@ -219,7 +211,7 @@ export default function Home() {
           <div className="max-w-7xl xl:max-w-[1400px] 2xl:max-w-[1600px] 4xl:max-w-[2000px] mx-auto w-full">
             <div className="mb-15 4xl:mb-32 flex items-center gap-4">
               <Star className="w-5 h-5 4xl:w-8 4xl:h-8 text-white animate-pulse" />
-              <span className="text-[10px] 4xl:text-sm uppercase tracking-[0.6em] font-black text-white/40">Verified Impact</span>
+              <span className="text-[10px] 4xl:text-sm uppercase tracking-[0.6em] font-black text-white/70">Verified Impact</span>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 xl:gap-12 4xl:gap-20">
@@ -234,7 +226,7 @@ export default function Home() {
                     </p>
                     <div className="pt-8 4xl:pt-16 border-t border-white/5">
                       <p className="text-base md:text-lg 2xl:text-xl 4xl:text-[2rem] font-black tracking-tighter uppercase italic">{res.name}</p>
-                      <p className="text-[10px] 4xl:text-sm uppercase tracking-[0.4em] text-white/30">{res.role}</p>
+                      <p className="text-[10px] 4xl:text-sm uppercase tracking-[0.4em] text-white/65">{res.role}</p>
                     </div>
                   </div>
                 </FloatingElement>
@@ -248,7 +240,7 @@ export default function Home() {
           <div className="max-w-7xl xl:max-w-[1400px] 2xl:max-w-[1600px] 4xl:max-w-[2000px] mx-auto">
             <div className="flex flex-col md:flex-row justify-between items-start xl:mb-7 md:items-end gap-8">
               <div className="max-w-xl xl:max-w-2xl text-left">
-                <span className="text-[9px] sm:text-[10px] uppercase tracking-[0.5em] font-black text-white/30 mb-4 sm:mb-6 block">Our Methodology</span>
+                <span className="text-[9px] sm:text-[10px] uppercase tracking-[0.5em] font-black text-white/65 mb-4 sm:mb-6 block">Our Methodology</span>
                 <h2 className="text-4xl sm:text-5xl md:text-7xl lg:text-7xl 3xl:text-8xl font-black tracking-tighter uppercase italic leading-none">
                   The 7-Step <br /> <span className="text-gray-500">VELOCITY</span>
                 </h2>
@@ -292,9 +284,9 @@ export default function Home() {
         <section className="relative py-24 sm:py-32 xl:py-20 px-4 sm:px-6 bg-white text-black overflow-hidden">
           <div className="max-w-7xl xl:max-w-[1400px] 2xl:max-w-[1600px] 4xl:max-w-[2000px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 sm:gap-16 lg:gap-20 items-center">
             <div className="relative">
-              <span className="text-[9px] sm:text-[10px] uppercase tracking-[0.5em] font-black text-black/30 mb-6 sm:mb-8 block">Your Investment</span>
+              <span className="text-[9px] sm:text-[10px] uppercase tracking-[0.5em] font-black text-black/60 mb-6 sm:mb-8 block">Your Investment</span>
               <h2 className="text-5xl sm:text-6xl md:text-8xl lg:text-[6rem] xl:text-8xl 2xl:text-9xl 4xl:text-11xl font-black tracking-tighter uppercase italic leading-[0.85] mb-8 sm:mb-12 h720:text-6xl">
-                Scale <br className="hidden sm:block" /> Without <br className="hidden sm:sm:block" /> <span className="text-gray-400">Limits</span>
+                Scale <br className="hidden sm:block" /> Without <br className="hidden sm:sm:block" /> <span className="text-gray-600">Limits</span>
               </h2>
               <p className="text-gray-500 text-base sm:text-lg max-w-md font-semibold italic">
                 This is not coaching. This is transformation. Choose how far you want to go.
@@ -308,8 +300,8 @@ export default function Home() {
                     <Lock className="w-4 h-4 sm:w-5 sm:h-5 opacity-10 group-hover:opacity-100 transition-opacity" />
                   </div>
                   <h3 className="text-2xl sm:text-3xl font-black tracking-tighter uppercase italic mb-2">{tier.name}</h3>
-                  <p className="text-[9px] sm:text-[10px] uppercase tracking-[0.4em] font-black text-gray-400 mb-6 sm:mb-8">{tier.price}</p>
-                  <p className="text-gray-500 group-hover:text-gray-400 mb-6 sm:mb-8 text-sm sm:text-base font-medium">{tier.desc}</p>
+                  <p className="text-[9px] sm:text-[10px] uppercase tracking-[0.4em] font-black text-gray-700 group-hover:text-gray-300 mb-6 sm:mb-8">{tier.price}</p>
+                  <p className="text-gray-700 group-hover:text-gray-300 mb-6 sm:mb-8 text-sm sm:text-base font-medium">{tier.desc}</p>
                   <ul className="space-y-3 sm:space-y-4">
                     {tier.features.map((feat, j) => (
                       <li key={j} className="flex items-center gap-2 sm:gap-3 text-xs sm:text-sm font-bold opacity-60 group-hover:opacity-100">
@@ -334,7 +326,7 @@ export default function Home() {
               </h2>
             </div>
             <div className="h-[2px] w-32 bg-white/20 mx-auto mb-12" />
-            <p className="text-lg md:text-xl text-white/40 uppercase tracking-[0.5em] font-black">
+            <p className="text-lg md:text-xl text-white/70 uppercase tracking-[0.5em] font-black">
               Don&apos;t chase fame, become an example.
             </p>
           </div>
@@ -344,7 +336,7 @@ export default function Home() {
         <section className="relative py-24 sm:py-32 xl:py-15 px-4 sm:px-6">
           <div className="max-w-[1000px] mx-auto">
             <div className="text-center mb-16 md:mb-24">
-              <span className="text-[9px] sm:text-[10px] uppercase tracking-[0.4em] font-black text-white/30 mb-4 block">Clearing the Path</span>
+              <span className="text-[9px] sm:text-[10px] uppercase tracking-[0.4em] font-black text-white/65 mb-4 block">Clearing the Path</span>
               <h2 className="text-3xl sm:text-4xl md:text-6xl font-black tracking-tighter uppercase italic">Frequently <span className="text-gray-500">Asked</span></h2>
             </div>
 
@@ -399,6 +391,7 @@ export default function Home() {
               </a>
               <Link
                 href="/services"
+                prefetch={false}
                 className="w-full sm:w-auto px-8 sm:px-10 py-5 border border-white/20 text-white font-black uppercase tracking-wide rounded-full hover:bg-white hover:text-black transition-all active:scale-95 inline-block text-[10px] sm:text-[12px] min-h-[56px] flex items-center justify-center"
               >
                 VIEW SYSTEM →
