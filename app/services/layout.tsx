@@ -1,18 +1,17 @@
 import type { Metadata } from "next";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Business Coaching Services | Systems for Scaling",
+export const metadata: Metadata = buildPageMetadata({
+  title: "Business Coaching Services in Ahmedabad | Bhadrik Panchal",
   description:
-    "Choose premium business coaching programs built for clarity, systems, and execution. Eliminate bottlenecks, sharpen strategy, and scale with repeatable growth.",
+    "Explore business coaching services for founders who need better clarity, systems, execution, and consistent scale in Ahmedabad and across Gujarat.",
+  path: "/services",
   keywords: [
-    "business coach",
-    "business growth",
-    "scaling",
-    "systems",
-    "clarity",
-    "business coaching services",
+    "business coaching services Ahmedabad",
+    "growth mentor Gujarat",
+    "founder strategy coaching",
   ],
-};
+});
 
 export default function ServicesLayout({
   children,

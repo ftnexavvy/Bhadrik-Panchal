@@ -6,6 +6,7 @@ import FloatingElement from "../../components/FloatingElement";
 import TextReveal from "../../components/TextReveal";
 import Magnet from "../../components/Magnet";
 import Link from "next/link";
+import Image from "next/image";
 import { Target, Rocket, Zap, Shield } from "lucide-react";
 export default function AboutPage() {
     return (
@@ -25,6 +26,7 @@ export default function AboutPage() {
                 >
                     <h1 className="text-[2.2rem] sm:text-6xl md:text-9xl xl:text-[4rem] 2xl:text-[10rem] 4xl:text-11xl font-black tracking-tighter uppercase mb-8 leading-[1.1] md:leading-[0.9] italic">
                         Bhadrik <span className="text-gray-500">Panchal</span>
+                        <span className="sr-only">Business coach in Ahmedabad</span>
                     </h1>
                 </motion.div>
 
@@ -49,19 +51,14 @@ export default function AboutPage() {
                     {/* ── LEFT: IMAGE ── */}
                     <FloatingElement duration={8} yRange={[0, -20]} xRange={[0, 10]}>
                         <div className="relative aspect-4/5 md:aspect-5/6 rounded-2xl overflow-hidden group">
-                            <picture className="absolute inset-0 block h-full w-full">
-                                <source srcSet="/assets/images/profile1.webp" type="image/webp" />
-                                <source srcSet="/assets/images/profile1.jpg" type="image/jpeg" />
-                                <img
-                                    src="/assets/images/profile1.jpg"
-                                    alt="Bhadrik Panchal"
-                                    width={960}
-                                    height={1088}
-                                    loading="lazy"
-                                    decoding="async"
-                                    className="h-full w-full object-cover transition-transform duration-[2s] group-hover:scale-[1.03]"
-                                />
-                            </picture>
+                            <Image
+                                src="/assets/images/profile1.webp"
+                                alt="Bhadrik Panchal"
+                                fill
+                                loading="lazy"
+                                sizes="(max-width: 768px) 100vw, 50vw"
+                                className="absolute inset-0 h-full w-full object-cover transition-transform duration-[2s] group-hover:scale-[1.03]"
+                            />
                             <div className="absolute inset-0 bg-linear-to-t from-black via-black/35 to-transparent z-10" />
                             <div className="
           absolute inset-0 flex items-center justify-center z-10 pointer-events-none
@@ -222,11 +219,13 @@ export default function AboutPage() {
                                 className="group flex flex-col gap-3 p-5 border border-black/10 rounded-2xl hover:border-black/30 hover:bg-black/3 transition-all duration-500 overflow-hidden"
                             >
                                 <div className="relative w-full overflow-hidden rounded-lg">
-                                    <img
+                                    <Image
                                         src={item.img}
                                         alt={item.outlet}
+                                        width={3375}
+                                        height={1094}
                                         loading="lazy"
-                                        decoding="async"
+                                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 20vw"
                                         className="w-full h-auto object-contain grayscale opacity-70 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-700"
                                     />
                                 </div>

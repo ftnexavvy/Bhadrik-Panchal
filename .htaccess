@@ -1,5 +1,10 @@
 <IfModule mod_rewrite.c>
   RewriteEngine On
+
+  # Canonical redirect: force HTTPS and www host
+  RewriteCond %{HTTPS} !=on [OR]
+  RewriteCond %{HTTP_HOST} !^www\.bhadrikpanchal\.com$ [NC]
+  RewriteRule ^ https://www.bhadrikpanchal.com%{REQUEST_URI} [L,R=301]
 </IfModule>
 
 <IfModule mod_mime.c>

@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { CheckCircle2, Loader2 } from "lucide-react";
 import SectionWrapper from "@/components/SectionWrapper";
+import { trackEvent } from "@/lib/analytics";
 
 const STAGES = ["Starter", "Growing", "Scaling", "7-Figure+"] as const;
 type Stage = typeof STAGES[number] | null;
@@ -63,12 +64,22 @@ export default function ContactPage() {
                 setStatus("success");
                 setForm({ name: "", email: "", message: "", phone: "" });
                 setStage(null);
+                trackEvent("lead_form_submit", {
+                    form_name: "contact_form",
+                    user_stage: stage || "Not selected",
+                });
             } else {
                 setStatus("idle");
+                trackEvent("lead_form_error", {
+                    form_name: "contact_form",
+                });
             }
 
         } catch {
             setStatus("idle");
+            trackEvent("lead_form_error", {
+                form_name: "contact_form",
+            });
         }
 
         setTimeout(() => setStatus("idle"), 5000);
@@ -98,6 +109,7 @@ export default function ContactPage() {
                          font-black uppercase tracking-tighter leading-[0.9] italic mb-8 xl:mb-10"
                         >
                             Let&apos;s<br />Scale.
+                            <span className="sr-only">Book business coaching call in Ahmedabad</span>
                         </motion.h1>
 
                         <motion.p
@@ -189,7 +201,7 @@ export default function ContactPage() {
                                             {/* Name */}
                                             <div>
                                                 <div className="flex justify-between items-center mb-2.5">
-                                                    <label className="text-[8px] uppercase tracking-[0.45em] text-white font-bold">
+                                                    <label htmlFor="contact-name" className="text-[8px] uppercase tracking-[0.45em] text-white font-bold">
                                                         The Name
                                                     </label>
                                                     {errors.name && (
@@ -202,9 +214,13 @@ export default function ContactPage() {
                                         after:w-0 after:h-px after:bg-white focus-within:after:w-full
                                         after:transition-all after:duration-500">
                                                     <input
+                                                        id="contact-name"
+                                                        name="name"
                                                         value={form.name}
                                                         onChange={e => setForm({ ...form, name: e.target.value })}
                                                         placeholder="Your name"
+                                                        autoComplete="name"
+                                                        aria-label="Your name"
                                                         className={`w-full bg-transparent py-4 text-white text-[11px] font-bold
                                        tracking-[0.2em] uppercase outline-none border-b placeholder:text-white/15
                                        transition-colors duration-300
@@ -216,7 +232,7 @@ export default function ContactPage() {
                                             {/* Email */}
                                             <div>
                                                 <div className="flex justify-between items-center mb-2.5">
-                                                    <label className="text-[8px] uppercase tracking-[0.45em] text-white font-bold">
+                                                    <label htmlFor="contact-email" className="text-[8px] uppercase tracking-[0.45em] text-white font-bold">
                                                         The Email
                                                     </label>
                                                     {errors.email && (
@@ -229,10 +245,14 @@ export default function ContactPage() {
                                         after:w-0 after:h-px after:bg-white focus-within:after:w-full
                                         after:transition-all after:duration-500">
                                                     <input
+                                                        id="contact-email"
+                                                        name="email"
                                                         type="email"
                                                         value={form.email}
                                                         onChange={e => setForm({ ...form, email: e.target.value })}
                                                         placeholder="your@email.com"
+                                                        autoComplete="email"
+                                                        aria-label="Your email address"
                                                         className={`w-full bg-transparent py-4 text-white text-[11px] font-bold
                                        tracking-[0.2em] lowercase outline-none border-b placeholder:text-white/15
                                        transition-colors duration-300
@@ -243,7 +263,7 @@ export default function ContactPage() {
                                             {/* Phone */}
                                             <div>
                                                 <div className="flex justify-between items-center mb-2.5">
-                                                    <label className="text-[8px] uppercase tracking-[0.45em] text-white font-bold">
+                                                    <label htmlFor="contact-phone" className="text-[8px] uppercase tracking-[0.45em] text-white font-bold">
                                                         Contact Number
                                                     </label>
                                                 </div>
@@ -253,10 +273,14 @@ export default function ContactPage() {
     after:transition-all after:duration-500">
 
                                                     <input
+                                                        id="contact-phone"
+                                                        name="phone"
                                                         type="tel"
                                                         value={form.phone}
                                                         onChange={e => setForm({ ...form, phone: e.target.value })}
                                                         placeholder="Your phone number"
+                                                        autoComplete="tel"
+                                                        aria-label="Your contact number"
                                                         className="w-full bg-transparent py-4 text-white text-[11px] font-bold
       tracking-[0.2em] outline-none border-b placeholder:text-white/15
       transition-colors duration-300 border-white/8 focus:border-white/15"
@@ -291,7 +315,7 @@ export default function ContactPage() {
                                             {/* Message */}
                                             <div>
                                                 <div className="flex justify-between items-center mb-2.5">
-                                                    <label className="text-[8px] uppercase tracking-[0.45em] text-white font-bold">
+                                                    <label htmlFor="contact-message" className="text-[8px] uppercase tracking-[0.45em] text-white font-bold">
                                                         Main Challenge
                                                     </label>
                                                     {errors.message && (
@@ -304,10 +328,13 @@ export default function ContactPage() {
                                         after:w-0 after:h-px after:bg-white focus-within:after:w-full
                                         after:transition-all after:duration-500">
                                                     <textarea
+                                                        id="contact-message"
+                                                        name="message"
                                                         rows={3}
                                                         value={form.message}
                                                         onChange={e => setForm({ ...form, message: e.target.value })}
                                                         placeholder="What is your biggest bottleneck right now?"
+                                                        aria-label="Main challenge"
                                                         className={`w-full bg-transparent py-4 text-white text-[11px] font-bold
                                        tracking-[0.15em] uppercase outline-none border-b resize-none
                                        placeholder:text-white/15 transition-colors duration-300

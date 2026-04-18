@@ -1,18 +1,17 @@
 import type { Metadata } from "next";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "About Bhadrik Panchal | Business Coach & Growth Strategist",
+export const metadata: Metadata = buildPageMetadata({
+  title: "About Bhadrik Panchal | Business Coach & Mentor Ahmedabad",
   description:
-    "Learn how Bhadrik Panchal drives business growth through clarity, systems, and decisive execution, coaching founders to scale with confidence and control.",
+    "Learn how Bhadrik Panchal helps founders in Ahmedabad build clarity, decision systems, and scalable growth with practical business coaching.",
+  path: "/about",
   keywords: [
-    "business coach",
-    "business growth",
-    "scaling",
-    "systems",
-    "clarity",
-    "growth strategist",
+    "about Bhadrik Panchal",
+    "business coach Ahmedabad",
+    "founder mentor Gujarat",
   ],
-};
+});
 
 export default function AboutLayout({
   children,

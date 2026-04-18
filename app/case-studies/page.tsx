@@ -106,6 +106,7 @@ export default function CaseStudiesPage() {
                     >
                         <span className="block">Real</span>
                         <span className="block pr-[0.08em]">Transformations.</span>
+                        <span className="sr-only">Business growth case studies</span>
                     </motion.h1>
 
                     {/* Description */}

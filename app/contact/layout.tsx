@@ -1,18 +1,17 @@
 import type { Metadata } from "next";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Contact Bhadrik Panchal | Scale with Clarity and Systems",
+export const metadata: Metadata = buildPageMetadata({
+  title: "Contact Bhadrik Panchal | Book Business Coaching Call",
   description:
-    "Book a strategic call with Bhadrik Panchal to diagnose growth blocks, align systems, and execute a clear plan for scalable business growth and control.",
+    "Book a strategy call with Bhadrik Panchal to identify bottlenecks, improve systems, and plan your next stage of business growth.",
+  path: "/contact",
   keywords: [
-    "business coach",
-    "business growth",
-    "scaling",
-    "systems",
-    "clarity",
-    "contact business coach",
+    "book business coaching call",
+    "contact Bhadrik Panchal",
+    "business coach appointment Ahmedabad",
   ],
-};
+});
 
 export default function ContactLayout({
   children,

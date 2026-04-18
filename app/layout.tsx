@@ -1,12 +1,20 @@
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
+import { Suspense } from "react";
 import "./globals.css";
 import ClientShell from "@/components/ClientShell";
+import Analytics from "@/components/Analytics";
+import {
+  SITE_SHORT_NAME,
+  SITE_URL,
+  buildPageMetadata,
+  globalSchemas,
+} from "@/lib/seo";
 
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
-  display: "optional",
+  display: "swap",
 });
 
 export const viewport: Viewport = {
@@ -15,18 +23,36 @@ export const viewport: Viewport = {
   themeColor: "#000000",
 };
 
-export const metadata: Metadata = {
-  title: "Bhadrik Panchal Ahemdabad, Gujarat | Business Coach • Motivational Speaker • Entrepreneur",
+const homeMetadata = buildPageMetadata({
+  title: "Business Growth Coach in Ahmedabad | Bhadrik Panchal",
   description:
-    "Unlock business growth with clarity, systems, and disciplined execution. Bhadrik Panchal helps entrepreneurs scale faster with strategic precision and control.",
+    "Work with Bhadrik Panchal to build clarity, systems, and predictable business growth through strategic coaching, speaking, and execution support.",
+  path: "/",
   keywords: [
-    "business coach",
-    "business growth",
-    "scaling",
-    "systems",
-    "clarity",
-    "entrepreneur coaching",
+    "business growth coach in Ahmedabad",
+    "business coach in Ahmedabad",
+    "motivational speaker in Gujarat",
+    "Bhadrik Panchal",
   ],
+});
+
+export const metadata: Metadata = {
+  ...homeMetadata,
+  metadataBase: new URL(SITE_URL),
+  applicationName: SITE_SHORT_NAME,
+  referrer: "origin-when-cross-origin",
+  category: "Business",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+   icons: {
+    icon: "/favicon.ico",
+  },
+   verification: {
+    google: "IWHaxHUFJG_dj4eJeq8V1FHtvW0MF2oGU6qZlqF32Z0",
+  },
 };
 
 export default function RootLayout({
@@ -37,7 +63,6 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <head>
-        {/* Preload lightweight poster used in above-the-fold hero */}
         <link
           rel="preload"
           href="/sequence/frame_00_poster-640.webp"
@@ -47,11 +72,23 @@ export default function RootLayout({
           type="image/webp"
           fetchPriority="high"
         />
+        <link rel="preconnect" href="https://www.googletagmanager.com" crossOrigin="" />
+        <link rel="dns-prefetch" href="//www.google-analytics.com" />
+        {globalSchemas.map((schema, index) => (
+          <script
+            key={`global-schema-${index}`}
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+          />
+        ))}
       </head>
-      <body className={`${inter.variable} font-sans bg-black text-white antialiased cursor-none`}>
-        <ClientShell>
-          {children}
-        </ClientShell>
+      <body
+        className={`${inter.variable} font-sans bg-black text-white antialiased cursor-none`}
+      >
+        <ClientShell>{children}</ClientShell>
+        <Suspense fallback={null}>
+          <Analytics />
+        </Suspense>
       </body>
     </html>
   );

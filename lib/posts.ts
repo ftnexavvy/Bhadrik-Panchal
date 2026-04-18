@@ -1,11 +1,26 @@
-export const posts = [
+export type Post = {
+  slug: string;
+  category: string;
+  date: string;
+  publishedAt: string;
+  updatedAt?: string;
+  readTime: string;
+  title: string;
+  desc: string;
+  content: string;
+  keywords: string[];
+};
+
+export const posts: Post[] = [
   {
     slug: "why-most-businesses-never-scale",
     category: "DIGITAL GROWTH",
     date: "Apr 07, 2026",
+    publishedAt: "2026-04-07",
     readTime: "5 min read",
-    title: "Why Most Businesses Never Scale (And It’s Not Marketing)",
+    title: "Why Most Businesses Never Scale (And It's Not Marketing)",
     desc: "Most founders chase tactics. Real growth comes from structure, positioning, and execution systems.",
+    keywords: ["business growth strategy", "scaling systems", "founder coaching"],
     content: `
 Most businesses don’t fail because of lack of effort.
 They fail because they lack structure.
@@ -29,14 +44,15 @@ The goal is simple:
 Move from hustle → to systems → to scale.
 `,
   },
-
   {
     slug: "busy-not-productive",
     category: "PRODUCTIVITY",
     date: "Apr 05, 2026",
+    publishedAt: "2026-04-05",
     readTime: "4 min read",
     title: "Busy ≠ Productive: The Founder’s Trap",
     desc: "Being busy feels productive — but it’s often avoidance.",
+    keywords: ["founder productivity", "business execution", "leadership focus"],
     content: `
 Most founders are busy all day.
 But very few are actually productive.
@@ -59,14 +75,15 @@ Focus creates results.
 Everything else is noise.
 `,
   },
-
   {
     slug: "motivation-doesnt-build-businesses",
     category: "MINDSET",
     date: "Apr 02, 2026",
+    publishedAt: "2026-04-02",
     readTime: "6 min read",
     title: "Motivation Doesn’t Build Businesses — Systems Do",
     desc: "Motivation fades. Systems compound. If you rely on feelings, you stay stuck.",
+    keywords: ["business systems", "founder mindset", "execution discipline"],
     content: `
 Motivation is unreliable.
 
@@ -89,14 +106,15 @@ Consistency beats intensity.
 Every single time.
 `,
   },
-
   {
     slug: "clarity-is-the-new-competitive-advantage",
     category: "CLARITY",
     date: "Mar 28, 2026",
+    publishedAt: "2026-03-28",
     readTime: "3 min read",
     title: "If You Can’t Explain Your Business in 1 Line, You Can’t Scale",
     desc: "Confused messaging creates confused customers.",
+    keywords: ["business messaging", "positioning clarity", "conversion strategy"],
     content: `
 If people don’t understand what you do,
 they won’t buy from you.
@@ -118,14 +136,15 @@ The best businesses are not the most complex.
 They are the most clear.
 `,
   },
-
   {
     slug: "stop-copying-competitors",
     category: "STRATEGY",
     date: "Mar 25, 2026",
+    publishedAt: "2026-03-25",
     readTime: "5 min read",
     title: "Stop Copying Competitors — Start Building Positioning",
     desc: "When you copy, you compete. When you position, you dominate.",
+    keywords: ["business positioning", "competitive strategy", "brand authority"],
     content: `
 Copying competitors is the fastest way to stay average.
 
@@ -148,14 +167,15 @@ You don’t need to be better.
 You need to be different.
 `,
   },
-
   {
     slug: "ideas-dont-scale-execution-systems-do",
     category: "EXECUTION",
     date: "Mar 20, 2026",
+    publishedAt: "2026-03-20",
     readTime: "4 min read",
     title: "Ideas Don’t Scale. Execution Systems Do.",
     desc: "Execution discipline is the real growth lever.",
+    keywords: ["execution systems", "business operations", "scale strategy"],
     content: `
 Ideas are easy.
 Execution is rare.
@@ -182,3 +202,12 @@ Start building execution systems.
 `,
   },
 ];
+
+export const getAllPosts = () =>
+  [...posts].sort(
+    (a, b) =>
+      new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime(),
+  );
+
+export const getPostBySlug = (slug: string) =>
+  posts.find((post) => post.slug === slug);

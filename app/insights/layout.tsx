@@ -1,18 +1,17 @@
 import type { Metadata } from "next";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Insights by Bhadrik Panchal | Clarity, Systems, Scaling",
+export const metadata: Metadata = buildPageMetadata({
+  title: "Business Growth Insights & Founder Blog | Bhadrik Panchal",
   description:
-    "Read sharp insights on business growth, scaling systems, and execution discipline. Gain clarity, make stronger decisions, and lead your business with authority.",
+    "Read practical insights on business growth, leadership, positioning, and systems built for founders who want strategic and sustainable scale.",
+  path: "/insights",
   keywords: [
-    "business coach",
-    "business growth",
-    "scaling",
-    "systems",
-    "clarity",
-    "business insights",
+    "business growth blog",
+    "founder insights",
+    "business strategy articles",
   ],
-};
+});
 
 export default function InsightsLayout({
   children,

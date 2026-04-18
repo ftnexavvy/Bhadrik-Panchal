@@ -1,12 +1,14 @@
 "use client";
 
 import React from "react";
-import { posts } from "@/lib/posts";
+import { getAllPosts } from "@/lib/posts";
 import SectionWrapper from "@/components/SectionWrapper";
 import { motion } from "framer-motion";
 import Link from "next/link";
 
 export default function InsightsPage() {
+    const posts = getAllPosts();
+
     return (
         <main className="bg-black min-h-screen text-white pt-24 overflow-hidden">
 
@@ -22,8 +24,8 @@ export default function InsightsPage() {
                     </motion.span>
 
                     <h1 className="text-[2.2rem] sm:text-7xl md:text-8xl lg:text-[7rem] xl:text-[7rem] 2xl:text-[9rem] 4xl:text-11xl font-black uppercase tracking-tighter leading-none md:leading-[0.9] mb-8 sm:mb-12 italic flex flex-col items-center">
-                        <span>THE</span>
-                        <span className="text-gray-400">INSIGHTS.</span>
+                        <span>BUSINESS GROWTH</span>
+                        <span className="text-gray-400">INSIGHTS BLOG.</span>
                     </h1>
 
                     <p className="text-gray-400 uppercase tracking-widest text-sm max-w-2xl mx-auto leading-relaxed">
@@ -135,6 +137,23 @@ export default function InsightsPage() {
                             BOOK STRATEGY CALL →
                         </Link>
                     </div>
+                </div>
+            </SectionWrapper>
+
+            <SectionWrapper className="py-16 text-center">
+                <div className="max-w-4xl mx-auto flex flex-wrap justify-center gap-4">
+                    <Link
+                        href="/business-coach-ahmedabad"
+                        className="px-6 py-3 rounded-full border border-white/20 text-[10px] uppercase tracking-[0.3em] font-black"
+                    >
+                        Business Coach Ahmedabad
+                    </Link>
+                    <Link
+                        href="/motivational-speaker-gujarat"
+                        className="px-6 py-3 rounded-full border border-white/20 text-[10px] uppercase tracking-[0.3em] font-black"
+                    >
+                        Motivational Speaker Gujarat
+                    </Link>
                 </div>
             </SectionWrapper>
 

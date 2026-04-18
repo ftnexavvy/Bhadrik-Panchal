@@ -1,9 +1,7 @@
 "use client";
 
-import React from "react";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import { FloatingPathsBackground } from "@/components/ui/floating-paths";
 
 // Custom high-fidelity brand icons
 const InstagramIcon = ({ className }: { className?: string }) => (
@@ -53,6 +51,11 @@ const navLinks = [
     { name: "Services", href: "/services" },
     { name: "Case Studies", href: "/case-studies" },
     { name: "Insights", href: "/insights" },
+    { name: "Business Coach", href: "/business-coach" },
+    { name: "Motivational Speaker", href: "/motivational-speaker" },
+    { name: "Entrepreneur", href: "/entrepreneur" },
+    { name: "Business Coach Ahmedabad", href: "/business-coach-ahmedabad" },
+    { name: "Motivational Speaker Gujarat", href: "/motivational-speaker-gujarat" },
     { name: "Contact", href: "/contact" },
 ];
 
@@ -74,14 +77,34 @@ const socialLinks = [
 
 ];
 
+const footerPaths = Array.from({ length: 18 }, (_, i) => ({
+    id: i,
+    d: `M-${380 - i * 5} -${189 + i * 6}C-${380 - i * 5} -${189 + i * 6} -${312 - i * 5} ${216 - i * 6} ${152 - i * 5} ${343 - i * 6}C${616 - i * 5} ${470 - i * 6} ${684 - i * 5} ${875 - i * 6} ${684 - i * 5} ${875 - i * 6}`,
+    width: 0.5 + i * 0.05,
+    opacity: 0.12 + i * 0.012,
+}));
+
 export default function Footer() {
     return (
         <footer className="bg-black text-white pt-20 pb-10 px-6 relative overflow-hidden border-t border-white/10">
-            {/* Floating paths background */}
             <div className="absolute inset-0 pointer-events-none z-0">
-                <FloatingPathsBackground position={1} className="w-full h-full opacity-[0.15]">
-                    <span />
-                </FloatingPathsBackground>
+                <svg
+                    className="w-full h-full text-white opacity-[0.15]"
+                    viewBox="-200 -200 1096 716"
+                    fill="none"
+                    preserveAspectRatio="xMidYMid slice"
+                    aria-hidden="true"
+                >
+                    {footerPaths.map((path) => (
+                        <path
+                            key={path.id}
+                            d={path.d}
+                            stroke="currentColor"
+                            strokeWidth={path.width}
+                            strokeOpacity={path.opacity}
+                        />
+                    ))}
+                </svg>
             </div>
 
             {/* Soft Ambient Glow */}
@@ -110,6 +133,8 @@ export default function Footer() {
                                 href="https://cal.id/bhadrik-panchal-business-coach"
                                 target="_blank"
                                 rel="noopener noreferrer"
+                                data-track-event="cta_footer_booking"
+                                data-track-category="lead"
                                 className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-[0.3em] group text-white hover:text-gray-400 transition-colors"
                             >
                                 START YOUR GROWTH <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />

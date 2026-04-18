@@ -15,9 +15,8 @@ interface ScrollyCanvasProps {
   children?: React.ReactNode;
 }
 
-const POSTER_SRC_JPG = "/sequence/frame_00_delay-0.1s-400.jpg";
+const POSTER_SRC = "/sequence/frame_00_poster-640.webp";
 const POSTER_SRCSET_WEBP = "/sequence/frame_00_poster-400.webp 400w, /sequence/frame_00_poster-640.webp 640w";
-const POSTER_SRCSET_JPG = "/sequence/frame_00_delay-0.1s-400.jpg 400w, /sequence/frame_00_delay-0.1s.jpg 800w";
 const PRIORITY_RADIUS = 3;
 const MOBILE_PRIORITY_RADIUS = 1;
 const MOBILE_FRAME_STEP = 2;
@@ -306,12 +305,11 @@ export default function ScrollyCanvas({ frameCount, children }: ScrollyCanvasPro
         <div className="sticky top-0 h-screen w-full overflow-hidden pointer-events-none -mb-[100vh]">
           <picture className="absolute inset-0 block h-full w-full">
             <source srcSet={POSTER_SRCSET_WEBP} sizes="100vw" type="image/webp" />
-            <source srcSet={POSTER_SRCSET_JPG} sizes="100vw" type="image/jpeg" />
             <img
-              src={POSTER_SRC_JPG}
+              src={POSTER_SRC}
               alt="Hero poster"
-              width={800}
-              height={450}
+              width={640}
+              height={360}
               fetchPriority="high"
               className="absolute inset-0 h-full w-full object-cover"
             />
@@ -338,12 +336,11 @@ export default function ScrollyCanvas({ frameCount, children }: ScrollyCanvasPro
         {/* Poster image becomes the LCP target */}
         <picture className="absolute inset-0 block h-full w-full">
           <source srcSet={POSTER_SRCSET_WEBP} sizes="100vw" type="image/webp" />
-          <source srcSet={POSTER_SRCSET_JPG} sizes="100vw" type="image/jpeg" />
           <img
-            src={POSTER_SRC_JPG}
+            src={POSTER_SRC}
             alt="Hero poster"
-            width={800}
-            height={450}
+            width={640}
+            height={360}
             fetchPriority="high"
             className="absolute inset-0 h-full w-full object-cover"
           />

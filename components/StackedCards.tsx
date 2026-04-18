@@ -6,6 +6,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "@studio-freight/lenis";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 
 
 gsap.registerPlugin(ScrollTrigger);
@@ -319,7 +320,6 @@ export default function StackedCards({ cases }: { cases: Case[] }) {
                                 const yOff = (diag - 0.5) * DIAG_Y * 2;
                                 const zOff = i * DIAG_Z;
                                 const isHov = hoveredIdx === i;
-                                const fallbackImage = c.image?.replace(/\.webp$/i, ".jpg");
 
                                 return (
                                     <div
@@ -359,19 +359,14 @@ export default function StackedCards({ cases }: { cases: Case[] }) {
                                     >
                                         {/* Card base with Image */}
                                         {c.image ? (
-                                            <picture className="absolute inset-0 block h-full w-full">
-                                                <source srcSet={c.image} type="image/webp" />
-                                                {fallbackImage ? <source srcSet={fallbackImage} type="image/jpeg" /> : null}
-                                                <img
-                                                    src={fallbackImage ?? c.image}
-                                                    alt={c.client}
-                                                    width={640}
-                                                    height={640}
-                                                    loading="lazy"
-                                                    decoding="async"
-                                                    className="h-full w-full object-cover"
-                                                />
-                                            </picture>
+                                            <Image
+                                                src={c.image}
+                                                alt={c.client}
+                                                fill
+                                                loading="lazy"
+                                                sizes="(max-width: 1024px) 70vw, 290px"
+                                                className="absolute inset-0 h-full w-full object-cover"
+                                            />
                                         ) : (
                                             <div className="w-full h-full bg-[#f5f5f4]" />
                                         )}

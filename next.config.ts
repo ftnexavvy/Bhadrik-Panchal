@@ -8,7 +8,10 @@ const withAnalyzer = withBundleAnalyzer({
 const nextConfig: NextConfig = {
   output: "export",
   trailingSlash: true,
+  reactStrictMode: true,
+  poweredByHeader: false,
   compress: true,
+  assetPrefix: process.env.NEXT_PUBLIC_CDN_URL || undefined,
   productionBrowserSourceMaps: false,
   compiler: {
     // strip console.* in prod bundles to reduce JS size

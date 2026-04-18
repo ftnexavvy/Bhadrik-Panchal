@@ -1,18 +1,17 @@
 import type { Metadata } from "next";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Case Studies | Business Growth Systems in Action",
+export const metadata: Metadata = buildPageMetadata({
+  title: "Business Growth Case Studies | Bhadrik Panchal Ahmedabad",
   description:
-    "See business growth case studies where founders used clarity, systems, and focused execution to break plateaus, scale operations, and build momentum.",
+    "Read real business case studies from founders who improved clarity, leadership, and growth systems with Bhadrik Panchal’s coaching approach.",
+  path: "/case-studies",
   keywords: [
-    "business coach",
-    "business growth",
-    "scaling",
-    "systems",
-    "clarity",
-    "case studies",
+    "business coaching case studies",
+    "growth results Ahmedabad",
+    "founder transformation stories",
   ],
-};
+});
 
 export default function CaseStudiesLayout({
   children,

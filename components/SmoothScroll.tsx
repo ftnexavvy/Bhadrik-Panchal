@@ -1,7 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
-import Lenis from "lenis";
+import { useEffect } from "react";
 
 export default function SmoothScroll({ children }: { children: React.ReactNode }) {
     useEffect(() => {
@@ -11,10 +10,14 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
             return;
         }
 
-        let lenis: Lenis | null = null;
+        let lenis: { raf: (time: number) => void; destroy: () => void } | null = null;
         let rafId = 0;
+        let cancelled = false;
 
-        const start = () => {
+        const start = async () => {
+            const { default: Lenis } = await import("lenis");
+            if (cancelled) return;
+
             lenis = new Lenis({
                 duration: 1.2,
                 easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -34,10 +37,15 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
         };
 
         const idleHandle = typeof requestIdleCallback !== "undefined"
-            ? requestIdleCallback(() => start(), { timeout: 200 })
-            : setTimeout(() => start(), 150);
+            ? requestIdleCallback(() => {
+                void start();
+            }, { timeout: 200 })
+            : setTimeout(() => {
+                void start();
+            }, 150);
 
         return () => {
+            cancelled = true;
             if (typeof cancelIdleCallback !== "undefined") {
                 cancelIdleCallback(idleHandle as unknown as number);
             } else {

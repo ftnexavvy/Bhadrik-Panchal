@@ -140,6 +140,7 @@ export default function ServicesPage() {
                         font-black uppercase tracking-tighter mb-6 sm:mb-8 md:mb-10 italic
                     ">
                         BUILD THE BUSINESS.<br />BECOME THE PERSON.
+                        <span className="sr-only">Business coaching services in Ahmedabad</span>
                     </h1>
 
                     <p className="text-gray-400 uppercase tracking-widest text-[10px] sm:text-xs md:text-sm max-w-xs sm:max-w-lg md:max-w-2xl mx-auto leading-relaxed">

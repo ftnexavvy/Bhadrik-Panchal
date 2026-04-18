@@ -1,13 +1,7 @@
-"use client";
-
-import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
-import Script from "next/script";
-import ScrollyCanvas from "@/components/ScrollyCanvas";
+import DeferredScrollyCanvas from "@/components/DeferredScrollyCanvas";
 import Footer from "@/components/Footer";
-import FloatingElement from "@/components/FloatingElement";
-import Magnet from "@/components/Magnet";
+import HomeFaqs from "@/components/HomeFaqs";
 import {
   Zap,
   ChevronRight,
@@ -15,8 +9,6 @@ import {
   Star,
   CheckCircle,
   Lock,
-  Plus,
-  Minus
 } from "lucide-react";
 
 const steps = [
@@ -123,18 +115,9 @@ const faqs = [
 ];
 
 export default function Home() {
-  const [openFaq, setOpenFaq] = useState<number | null>(null);
-
   return (
     <main className="bg-black text-white selection:bg-white selection:text-black">
-      {/* Lazy load Cal.com embed script */}
-      <Script
-        id="cal-embed-script"
-        src="https://asset.cal.com/embed/embed.js"
-        strategy="lazyOnload"
-      />
-
-      <ScrollyCanvas frameCount={80}>
+      <DeferredScrollyCanvas frameCount={80}>
         {/* Hero Content Section */}
         <section className="relative min-h-[100vh] h-auto flex flex-col items-center justify-center text-center px-4 sm:px-6 pt-32 sm:pt-40 md:pt-48 xl:pt-56 4xl:pt-72 pb-24 md:pb-32">
           {/* 🔥 Background Glow */}
@@ -147,11 +130,12 @@ export default function Home() {
             <h1
               className="text-[2.2rem] sm:text-7xl lg:text-[4.5rem] xl:text-[5rem] 2xl:text-[7.5rem] 4xl:text-[8.8rem] font-black uppercase leading-[1.1] sm:leading-[0.96] mb-8 sm:mb-10 italic [word-spacing:0.05em] px-3 sm:px-4 pr-[0.12em] [text-shadow:0_4px_18px_rgba(0,0,0,0.92)] sm:[text-shadow:none]"
             >
-              GROWTH IS NOT<br />
+              BUSINESS GROWTH COACH <br />
               <span className="relative inline-block pr-[0.1em] text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-500">
-                LUCK IT’S SYSTEM
+                BHADRIK PANCHAL
                 <span className="absolute inset-0 blur-xl bg-white/20 opacity-40"></span>
               </span>
+              <span className="sr-only">Business growth coach in Ahmedabad</span>
             </h1>
 
             {/* 🔥 Subtext */}
@@ -164,46 +148,36 @@ export default function Home() {
 
           {/* 🔥 CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4">
-            <Magnet strength={0.2}>
-              <a
-                href="https://cal.id/bhadrik-panchal-business-coach"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex items-center justify-center gap-3 px-6 py-3 sm:px-8 sm:py-4 md:px-10 md:py-5 xl:px-6 xl:py-3 2xl:px-8 2xl:py-4 4xl:px-12 4xl:py-6 bg-white text-black text-[9px] sm:text-[10px] md:text-[12px] xl:text-[8px] 2xl:text-[10px] 4xl:text-[14px] uppercase font-black tracking-[0.3em] rounded-full hover:bg-transparent hover:text-white border border-white transition-all duration-500 hover:shadow-[0_0_30px_rgba(255,255,255,0.4)] active:scale-95 min-h-[40px] sm:min-h-[48px] md:min-h-[56px] xl:min-h-[48px] 2xl:min-h-[52px] 4xl:min-h-[64px]"
-              >
-                START YOUR GROWTH
-                <ChevronRight className="w-3 h-3 md:w-4 md:h-4 xl:w-3 xl:h-3 2xl:w-4 2xl:h-4 4xl:w-5 4xl:h-5 group-hover:translate-x-1 transition-transform" />
-              </a>
-            </Magnet>
+            <a
+              href="https://cal.id/bhadrik-panchal-business-coach"
+              target="_blank"
+              rel="noopener noreferrer"
+              data-track-event="cta_home_hero_booking"
+              data-track-category="lead"
+              className="group flex items-center justify-center gap-3 px-6 py-3 sm:px-8 sm:py-4 md:px-10 md:py-5 xl:px-6 xl:py-3 2xl:px-8 2xl:py-4 4xl:px-12 4xl:py-6 bg-white text-black text-[9px] sm:text-[10px] md:text-[12px] xl:text-[8px] 2xl:text-[10px] 4xl:text-[14px] uppercase font-black tracking-[0.3em] rounded-full hover:bg-transparent hover:text-white border border-white transition-all duration-500 hover:shadow-[0_0_30px_rgba(255,255,255,0.4)] active:scale-95 min-h-[40px] sm:min-h-[48px] md:min-h-[56px] xl:min-h-[48px] 2xl:min-h-[52px] 4xl:min-h-[64px]"
+            >
+              START YOUR GROWTH
+              <ChevronRight className="w-3 h-3 md:w-4 md:h-4 xl:w-3 xl:h-3 2xl:w-4 2xl:h-4 4xl:w-5 4xl:h-5 group-hover:translate-x-1 transition-transform" />
+            </a>
 
             <Link
               href="/case-studies"
               prefetch={false}
+              data-track-event="cta_home_hero_case_studies"
+              data-track-category="navigation"
               className="group flex items-center justify-center gap-3 px-6 py-3 sm:px-8 sm:py-4 md:px-10 md:py-5 xl:px-6 xl:py-3 2xl:px-8 2xl:py-4 4xl:px-12 4xl:py-6 border border-white/20 text-white text-[9px] sm:text-[10px] md:text-[12px] xl:text-[8px] 2xl:text-[10px] 4xl:text-[14px] uppercase font-black tracking-[0.3em] rounded-full hover:bg-white hover:text-black transition-all duration-500 active:scale-95 min-h-[40px] sm:min-h-[48px] md:min-h-[56px] xl:min-h-[48px] 2xl:min-h-[52px] 4xl:min-h-[64px]"
             >
               VIEW RESULTS
               <ArrowRight className="w-3 h-3 md:w-4 md:h-4 xl:w-3 xl:h-3 2xl:w-4 2xl:h-4 4xl:w-5 4xl:h-5 group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>
-          <FloatingElement
-            duration={7}
-            delay={0}
-            yRange={[0, -20]}
-            xRange={[0, 10]}
-            className="absolute top-[20%] left-[10%] hidden md:block"
-          >
+          <div className="absolute top-[20%] left-[10%] hidden md:block">
             <div className="w-32 h-32 border border-white/10 rounded-full blur-sm" />
-          </FloatingElement>
+          </div>
 
-          <FloatingElement
-            duration={8}
-            delay={1}
-            yRange={[0, -30]}
-            xRange={[0, -15]}
-            className="absolute bottom-[20%] right-[10%] hidden md:block"
-          >
+          <div className="absolute bottom-[20%] right-[10%] hidden md:block">
             <div className="w-48 h-48 border border-white/10 rounded-full blur-md" />
-          </FloatingElement>
+          </div>
         </section>
 
         {/* The Results - Testimonials */}
@@ -215,8 +189,8 @@ export default function Home() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 xl:gap-12 4xl:gap-20">
-              {results.map((res, i) => (
-                <FloatingElement key={i} delay={i * 0.3} yRange={[0, -15]}>
+              {results.map((res) => (
+                <div key={res.name}>
                   <div className="p-8 md:p-12 xl:p-10 4xl:p-24 border border-white/5 bg-neutral-900/40 backdrop-blur-3xl rounded-[2.5rem] md:rounded-[3rem] 4xl:rounded-[5rem] h-full group">
                     <div className="text-xl md:text-2xl 2xl:text-5xl 4xl:text-7xl font-black tracking-normal lg:tracking-tighter uppercase italic text-white mb-6 4xl:mb-10">
                       {res.result}
@@ -229,7 +203,7 @@ export default function Home() {
                       <p className="text-[10px] 4xl:text-sm uppercase tracking-[0.4em] text-white/65">{res.role}</p>
                     </div>
                   </div>
-                </FloatingElement>
+                </div>
               ))}
             </div>
           </div>
@@ -252,12 +226,8 @@ export default function Home() {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
               {steps.map((step, i) => (
-                <motion.div
+                <div
                   key={i}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.8, delay: i * 0.1 }}
                   className="relative p-8 sm:p-10 border border-white/5 bg-neutral-900/50 backdrop-blur-xl rounded-xl sm:rounded-2xl group hover:bg-white hover:text-black transition-all duration-700 h720:p-6"
                 >
 
@@ -274,7 +244,7 @@ export default function Home() {
                     {step.desc}
                   </p>
 
-                </motion.div>
+                </div>
               ))}
             </div>
           </div>
@@ -340,33 +310,7 @@ export default function Home() {
               <h2 className="text-3xl sm:text-4xl md:text-6xl font-black tracking-tighter uppercase italic">Frequently <span className="text-gray-500">Asked</span></h2>
             </div>
 
-            <div className="space-y-4">
-              {faqs.map((faq, i) => (
-                <div key={i} className="border border-white/5 rounded-2xl sm:rounded-3xl overflow-hidden backdrop-blur-xl">
-                  <button
-                    onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                    className="w-full p-6 sm:p-8 md:p-10 flex items-center justify-between text-left hover:bg-white/5 transition-colors"
-                  >
-                    <span className="text-lg sm:text-xl md:text-2xl font-black tracking-tighter uppercase italic pr-4">{faq.q}</span>
-                    {openFaq === i ? <Minus className="w-5 h-5 sm:w-6 sm:h-6" /> : <Plus className="w-5 h-5 sm:w-6 sm:h-6" />}
-                  </button>
-                  <AnimatePresence>
-                    {openFaq === i && (
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.5, ease: [0.33, 1, 0.68, 1] }}
-                      >
-                        <div className="px-6 sm:px-10 pb-8 sm:pb-10 text-gray-400 text-base sm:text-lg leading-relaxed font-medium">
-                          {faq.a}
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
-              ))}
-            </div>
+            <HomeFaqs items={faqs} />
           </div>
         </section>
 
@@ -385,6 +329,8 @@ export default function Home() {
                 href="https://cal.id/bhadrik-panchal-business-coach"
                 target="_blank"
                 rel="noopener noreferrer"
+                data-track-event="cta_home_newsletter_booking"
+                data-track-category="lead"
                 className="w-full sm:w-auto px-8 sm:px-10 py-5 bg-white text-black font-black uppercase tracking-wide rounded-full hover:shadow-[0_0_30px_rgba(255,255,255,0.4)] transition-all active:scale-95 inline-block text-[10px] sm:text-[12px] min-h-[56px] flex items-center justify-center"
               >
                 START YOUR GROWTH
@@ -392,6 +338,8 @@ export default function Home() {
               <Link
                 href="/services"
                 prefetch={false}
+                data-track-event="cta_home_newsletter_services"
+                data-track-category="navigation"
                 className="w-full sm:w-auto px-8 sm:px-10 py-5 border border-white/20 text-white font-black uppercase tracking-wide rounded-full hover:bg-white hover:text-black transition-all active:scale-95 inline-block text-[10px] sm:text-[12px] min-h-[56px] flex items-center justify-center"
               >
                 VIEW SYSTEM →
@@ -403,25 +351,15 @@ export default function Home() {
         {/* 🚀 NEW IMPACT SECTION */}
         <section className="relative py-24 sm:py-32 md:py-40 px-4 sm:px-6 overflow-hidden">
           <div className="max-w-[1200px] mx-auto text-center">
-            <motion.h2
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1 }}
-              className="text-4xl sm:text-5xl md:text-8xl font-black tracking-tighter uppercase italic mb-8 sm:mb-10 leading-none"
-            >
+            <h2 className="text-4xl sm:text-5xl md:text-8xl font-black tracking-tighter uppercase italic mb-8 sm:mb-10 leading-none">
               Build Systems <br />
               <span className="text-gray-500">Not Stress</span>
-            </motion.h2>
+            </h2>
 
             {/* Subtext */}
-            <motion.p
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 1 }}
-              className="text-gray-400 max-w-2xl mx-auto text-base sm:text-lg mb-12 sm:mb-16"
-            >
+            <p className="text-gray-400 max-w-2xl mx-auto text-base sm:text-lg mb-12 sm:mb-16">
               Most businesses stay stuck because they rely on effort. Real growth comes from systems, not struggle.
-            </motion.p>
+            </p>
 
             {/* Cards */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
@@ -439,12 +377,9 @@ export default function Home() {
                   title: "High Profit Systems",
                   desc: "Not just revenue — build systems that improve margins, control, and long-term stability."
                 }
-              ].map((item, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 30, scale: 0.95 }}
-                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                  transition={{ delay: i * 0.2, duration: 0.8 }}
+              ].map((item) => (
+                <div
+                  key={item.title}
                   className="p-8 sm:p-10 rounded-[2rem] border border-white/10 bg-white/5 backdrop-blur-xl hover:bg-white hover:text-black transition-all duration-700 group md:min-h-[220px] flex flex-col justify-center"
                 >
                   <h3 className="text-xl sm:text-2xl font-black uppercase italic mb-4">
@@ -454,7 +389,7 @@ export default function Home() {
                   <p className="text-gray-400 group-hover:text-black/70 text-xs sm:text-sm leading-relaxed">
                     {item.desc}
                   </p>
-                </motion.div>
+                </div>
               ))}
 
             </div>
@@ -464,8 +399,119 @@ export default function Home() {
           <div className="absolute -top-20 left-1/2 -translate-x-1/2 w-[300px] h-[300px] sm:w-[500px] sm:h-[500px] bg-white/5 blur-[80px] sm:blur-[120px] rounded-full pointer-events-none" />
         </section>
 
+        <section className="relative py-24 sm:py-32 px-6 border-t border-white/10">
+          <div className="max-w-5xl mx-auto space-y-16">
+
+            {/* 🔥 WHO THIS IS FOR */}
+            <article className="space-y-6 text-center">
+              <h2 className="text-4xl sm:text-6xl font-black uppercase italic tracking-tight">
+                Built For Serious Founders
+              </h2>
+              <p className="text-white/70 max-w-3xl mx-auto leading-relaxed text-base sm:text-lg">
+                This is designed for entrepreneurs who are tired of working hard without real progress.
+                If your business feels stuck, inconsistent, or overly dependent on you, the problem is not effort — it is structure.
+                The focus here is to move from scattered execution to clear, system-driven growth.
+              </p>
+            </article>
+
+            {/* 🔥 PROBLEM SECTION */}
+            <article className="space-y-6">
+              <h2 className="text-3xl sm:text-4xl font-black uppercase italic tracking-tight">
+                Why Most Businesses Stay Stuck
+              </h2>
+              <p className="text-white/75 leading-relaxed">
+                Most founders operate without clarity. Decisions are reactive, teams are misaligned,
+                and growth depends on constant effort instead of structured systems.
+                Marketing feels inconsistent, execution feels chaotic, and scaling feels uncertain.
+              </p>
+              <p className="text-white/75 leading-relaxed">
+                Without clear positioning, defined processes, and strong execution discipline,
+                businesses stay trapped in cycles of temporary wins followed by stagnation.
+              </p>
+            </article>
+
+            {/* 🔥 SOLUTION SECTION */}
+            <article className="space-y-6">
+              <h2 className="text-3xl sm:text-4xl font-black uppercase italic tracking-tight">
+                What Actually Creates Growth
+              </h2>
+              <p className="text-white/75 leading-relaxed">
+                Real business growth comes from clarity, systems, and execution.
+                When your positioning is clear, your operations are simplified, and your systems are repeatable,
+                growth stops being unpredictable.
+              </p>
+              <p className="text-white/75 leading-relaxed">
+                Instead of chasing tactics, the focus shifts to building a structure that produces consistent results —
+                better decisions, stronger teams, and scalable revenue.
+              </p>
+            </article>
+
+            {/* 🔥 APPROACH */}
+            <article className="space-y-6">
+              <h2 className="text-3xl sm:text-4xl font-black uppercase italic tracking-tight">
+                The Approach
+              </h2>
+              <p className="text-white/75 leading-relaxed">
+                Every business is different, but the underlying problems are often the same.
+                The process begins by identifying where growth is leaking — whether in positioning,
+                execution, team alignment, or decision-making.
+              </p>
+              <p className="text-white/75 leading-relaxed">
+                From there, the focus is on fixing high-impact areas first.
+                This includes building demand systems, improving leadership clarity,
+                and creating execution frameworks that teams can follow without constant supervision.
+              </p>
+            </article>
+
+            {/* 🔥 RESULT */}
+            <article className="space-y-6">
+              <h2 className="text-3xl sm:text-4xl font-black uppercase italic tracking-tight">
+                What Changes After Implementation
+              </h2>
+              <p className="text-white/75 leading-relaxed">
+                Businesses become easier to manage, teams become more aligned,
+                and growth becomes more predictable. Founders move from daily firefighting
+                to strategic thinking and leadership.
+              </p>
+              <p className="text-white/75 leading-relaxed">
+                Instead of relying on motivation or constant hustle,
+                the business starts running on systems that compound over time.
+              </p>
+            </article>
+
+            {/* 🔥 CTA */}
+            <article className="space-y-6">
+              <h2 className="text-3xl sm:text-4xl font-black uppercase italic tracking-tight">
+                Start With Clarity
+              </h2>
+              <p className="text-white/75 leading-relaxed">
+                If your business feels stuck or inconsistent, the next step is not more effort.
+                It is clarity, structure, and focused execution.
+              </p>
+
+              <div className="flex flex-wrap gap-4">
+                <Link
+                  href="/contact"
+                  className="px-8 py-4 rounded-full bg-white text-black text-[10px] uppercase tracking-[0.3em] font-black min-h-12 inline-flex items-center"
+                >
+                  Book A Strategy Call
+                </Link>
+
+                <span className="px-6 py-4 border border-white/20 text-white text-[10px] uppercase tracking-[0.3em] font-black">
+                  Business Coach Ahmedabad
+                </span>
+
+                <span className="px-6 py-4 border border-white/20 text-white text-[10px] uppercase tracking-[0.3em] font-black">
+                  Business Growth Consultant India
+                </span>
+              </div>
+            </article>
+
+          </div>
+        </section>
+
         <Footer />
-      </ScrollyCanvas>
+      </DeferredScrollyCanvas>
     </main>
   );
 }
