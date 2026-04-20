@@ -10,19 +10,18 @@ export default function StickyCTA() {
             <motion.div
                 initial={{ opacity: 0, scale: 0.9, y: 20 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
-                className="fixed bottom-6 right-6 z-[60]"
+                className="fixed bottom-6 right-6 z-60"
             >
                 <div className="relative group">
                     {/* Pulsing ring background */}
                     <div className="absolute inset-0 bg-white rounded-full blur-[20px] opacity-10 group-hover:opacity-30 transition-opacity duration-700 animate-pulse" />
 
                     <a
-                        href="https://cal.id/bhadrik-panchal-business-coach"
-                        target="_blank"
+                        href="/book-call"
                         rel="noopener noreferrer"
                         className="
                             relative flex items-center justify-center
-                            w-[64px] h-[64px] md:w-[72px] md:h-[72px]
+                            w-16 h-16 md:w-18 md:h-18
                             bg-white text-black rounded-full shadow-2xl
                             hover:scale-110 active:scale-95 transition-all duration-300
                             border border-white/20

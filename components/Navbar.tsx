@@ -49,14 +49,14 @@ export default function Navbar() {
     return (
         <>
             <nav
-                className={`fixed top-0 left-0 w-full z-[100] transition-all duration-700 ${scrolled
+                className={`fixed top-0 left-0 w-full z-100 transition-all duration-700 ${scrolled
                     ? isHome
                         ? "py-4 bg-[#030712]/85 backdrop-blur-2xl border-b border-white/10"
                         : "py-4 bg-black/40 backdrop-blur-2xl border-b border-white/5"
                     : "py-8 bg-transparent"
                     }`}
             >
-                <div className="max-w-[1500px] mx-auto px-6 md:px-12 flex justify-between items-center">
+                <div className="max-w-375 mx-auto px-6 md:px-12 flex justify-between items-center">
                     <Link href="/" className="text-xl md:text-2xl font-black tracking-tighter uppercase text-white flex items-center gap-2 group">
                         <span className="bg-white text-black px-2 py-0.5 rounded-sm">BHADRIK</span>
                         <span className="text-gray-300 group-hover:text-white transition-colors duration-500">PANCHAL</span>
@@ -70,18 +70,17 @@ export default function Navbar() {
                                     key={item.name}
                                     href={item.href}
                                     prefetch={false}
-                                    className={`relative text-[10px] lg:text-[11px] uppercase tracking-widest lg:tracking-[0.1em] xl:tracking-[0.25em] 2xl:tracking-[0.4em] font-bold transition-all duration-300 group py-2 ${isHome ? "text-white/70 hover:text-white" : "text-gray-500 hover:text-white"
+                                    className={`relative text-[10px] lg:text-[11px] uppercase tracking-widest lg:tracking-widest xl:tracking-[0.25em] 2xl:tracking-[0.4em] font-bold transition-all duration-300 group py-2 ${isHome ? "text-white/70 hover:text-white" : "text-gray-500 hover:text-white"
                                         }`}
                                 >
                                     {item.name}
-                                    <span className="absolute bottom-0 left-0 h-[1px] w-full origin-left scale-x-0 bg-white transition-transform duration-300 group-hover:scale-x-100" />
+                                    <span className="absolute bottom-0 left-0 h-px w-full origin-left scale-x-0 bg-white transition-transform duration-300 group-hover:scale-x-100" />
                                 </Link>
                             ))}
                         </div>
 
                         <a
-                            href="https://cal.id/bhadrik-panchal-business-coach"
-                            target="_blank"
+                            href="/book-call"
                             rel="noopener noreferrer"
                             data-track-event="cta_nav_booking_desktop"
                             data-track-category="lead"
@@ -94,15 +93,15 @@ export default function Navbar() {
                     {/* Mobile Menu Toggle */}
                     <button
                         type="button"
-                        className="lg:hidden flex flex-col gap-1.5 z-[110] p-2"
+                        className="lg:hidden flex flex-col gap-1.5 z-110 p-2"
                         onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                         aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
                         aria-expanded={mobileMenuOpen}
                         aria-controls="mobile-nav-menu"
                     >
-                        <span className={`w-8 h-[1px] bg-white block transition-transform duration-300 ${mobileMenuOpen ? "translate-y-[7px] rotate-45" : ""}`} />
-                        <span className={`w-8 h-[1px] bg-white block transition-opacity duration-300 ${mobileMenuOpen ? "opacity-0" : "opacity-100"}`} />
-                        <span className={`w-8 h-[1px] bg-white block transition-transform duration-300 ${mobileMenuOpen ? "-translate-y-[7px] -rotate-45" : ""}`} />
+                        <span className={`w-8 h-px bg-white block transition-transform duration-300 ${mobileMenuOpen ? "translate-y-1.75 rotate-45" : ""}`} />
+                        <span className={`w-8 h-px bg-white block transition-opacity duration-300 ${mobileMenuOpen ? "opacity-0" : "opacity-100"}`} />
+                        <span className={`w-8 h-px bg-white block transition-transform duration-300 ${mobileMenuOpen ? "-translate-y-1.75 -rotate-45" : ""}`} />
                     </button>
                 </div>
             </nav>
@@ -111,7 +110,7 @@ export default function Navbar() {
             {mobileMenuOpen && (
                 <div
                     id="mobile-nav-menu"
-                    className="fixed inset-0 z-[90] bg-black/98 backdrop-blur-3xl flex flex-col items-center justify-start gap-8 sm:gap-12 lg:hidden overflow-y-auto pt-36 pb-20"
+                    className="fixed inset-0 z-90 bg-black/98 backdrop-blur-3xl flex flex-col items-center justify-start gap-8 sm:gap-12 lg:hidden overflow-y-auto pt-36 pb-20"
                 >
                     <div className="flex flex-col items-center gap-8">
                         {navLinks.map((item) => (
@@ -128,8 +127,7 @@ export default function Navbar() {
                     </div>
 
                     <a
-                        href="https://cal.id/bhadrik-panchal-business-coach"
-                        target="_blank"
+                        href="/book-call"
                         rel="noopener noreferrer"
                         onClick={() => setMobileMenuOpen(false)}
                         data-track-event="cta_nav_booking_mobile"

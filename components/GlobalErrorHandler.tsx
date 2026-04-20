@@ -13,18 +13,28 @@ export default function GlobalErrorHandler() {
     if (window.__bhadrikGlobalErrorHandlerInstalled__) return;
     window.__bhadrikGlobalErrorHandlerInstalled__ = true;
 
-    const handleError = (event: ErrorEvent) => {
-      if (typeof event.message === "string" && event.message.includes("ResizeObserver loop")) {
-        event.preventDefault();
-        return;
-      }
+    const handleError = (event: ErrorEvent | Event) => {
+      if (event instanceof ErrorEvent) {
+        if (typeof event.message === "string" && event.message.includes("ResizeObserver loop")) {
+          event.preventDefault();
+          return;
+        }
 
-      console.error("[GlobalError]", {
-        message: event.message,
-        source: event.filename,
-        line: event.lineno,
-        column: event.colno,
-      });
+        // eslint-disable-next-line no-console
+        window.console.warn("[GlobalError]", {
+          message: event.message || "Script error or cross-origin issue",
+          source: event.filename || "unknown",
+          line: event.lineno || 0,
+          column: event.colno || 0,
+          error: event.error,
+        });
+      } else {
+        // eslint-disable-next-line no-console
+        window.console.warn("[ResourceError]", {
+          target: event.target,
+          type: event.type,
+        });
+      }
     };
 
     const handleUnhandledRejection = (event: PromiseRejectionEvent) => {
@@ -33,7 +43,8 @@ export default function GlobalErrorHandler() {
           ? { message: event.reason.message, stack: event.reason.stack }
           : event.reason;
 
-      console.error("[UnhandledRejection]", reason);
+      // eslint-disable-next-line no-console
+      window.console.warn("[UnhandledRejection]", reason);
     };
 
     window.addEventListener("error", handleError);

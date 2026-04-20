@@ -304,8 +304,7 @@ export default function ServicesPage() {
                     </p>
 
                     <a
-                        href="https://cal.id/bhadrik-panchal-business-coach"
-                        target="_blank"
+                        href="/book-call"
                         rel="noopener noreferrer"
                         className="
                             inline-flex items-center justify-center

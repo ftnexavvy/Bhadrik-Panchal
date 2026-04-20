@@ -48,23 +48,21 @@ const GoogleIcon = ({ className }: { className?: string }) => (
 const navLinks = [
     { name: "Home", href: "/" },
     { name: "About", href: "/about" },
+    { name: "Contact", href: "/contact" },
     { name: "Services", href: "/services" },
-    { name: "Case Studies", href: "/case-studies" },
     { name: "Insights", href: "/insights" },
+    { name: "Case Studies", href: "/case-studies" },
+    { name: "Entrepreneur", href: "/entrepreneur" },
     { name: "Business Coach", href: "/business-coach" },
     { name: "Motivational Speaker", href: "/motivational-speaker" },
-    { name: "Entrepreneur", href: "/entrepreneur" },
-    { name: "Business Coach Ahmedabad", href: "/business-coach-ahmedabad" },
-    { name: "Motivational Speaker Gujarat", href: "/motivational-speaker-gujarat" },
-    { name: "Contact", href: "/contact" },
 ];
 
 const offerings = [
-    "Strategic 1:1 Mastery",
     "Inner Circle",
-    "Growth & Gap Audit",
     "Keynote Speaking",
-    "Business Workshops"
+    "Growth & Gap Audit",
+    "Business Workshops",
+    "Strategic 1:1 Mastery",
 ];
 
 const socialLinks = [
@@ -108,9 +106,9 @@ export default function Footer() {
             </div>
 
             {/* Soft Ambient Glow */}
-            <div className="absolute bottom-[-10%] left-1/2 -translate-x-1/2 w-[600px] h-[200px] bg-white/[0.02] blur-[100px] rounded-full pointer-events-none z-0" />
+            <div className="absolute bottom-[-10%] left-1/2 -translate-x-1/2 w-150 h-50 bg-white/2 blur-[100px] rounded-full pointer-events-none z-0" />
 
-            <div className="relative z-10 max-w-7xl xl:max-w-[1400px] 2xl:max-w-[1600px] mx-auto">
+            <div className="relative z-10 max-w-7xl xl:max-w-350 2xl:max-w-400 mx-auto">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 mb-20">
 
                     {/* Brand & CTA Unified */}
@@ -119,7 +117,7 @@ export default function Footer() {
                             <Link href="/" prefetch={false} className="text-2xl font-black uppercase tracking-tighter">
                                 BHADRIK <span className="text-gray-500 italic">PANCHAL</span>
                             </Link>
-                            <p className="text-[10px] uppercase tracking-[0.5em] text-white/30 font-bold mt-2">
+                            <p className="text-[10px] xl:text-[11px] 2xl:text-[12px] 3xl:text-[13px] uppercase tracking-[0.5em] text-white/30 font-bold mt-2">
                                 Clarity. Systems. Scale.
                             </p>
                         </div>
@@ -130,8 +128,7 @@ export default function Footer() {
                                 <span className="text-gray-500">WITHOUT LIMITS?</span>
                             </h2>
                             <a
-                                href="https://cal.id/bhadrik-panchal-business-coach"
-                                target="_blank"
+                                href="/book-call"
                                 rel="noopener noreferrer"
                                 data-track-event="cta_footer_booking"
                                 data-track-category="lead"
@@ -183,8 +180,8 @@ export default function Footer() {
                 <div className="pt-10 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8">
                     <div className="text-[10px] uppercase tracking-[0.2em] text-white/50 font-black flex items-center gap-4">
                         <span>© {new Date().getFullYear()} bhadrik panchal | business coach • motivational speaker • entrepreneur</span>
-                        <span className="hidden md:block w-8 h-[1px] bg-white/10" />
-                        <span className="hidden md:block italic text-white/50 italic">Built for the elite</span>
+                        <span className="hidden md:block w-8 h-px bg-white/10" />
+                        <span className="hidden md:block italic text-white/50">Built for the elite</span>
                     </div>
 
                     <div className="flex gap-4">
